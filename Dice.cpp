@@ -3,8 +3,10 @@
     Author: Anthony Talevi
 */
 
-#include "Dice.h"
 #include <iostream>
+
+#include "Dice.h"
+#include "RandomDice.h"
 
 Dice::Dice(Colour col): c(col){};
 
