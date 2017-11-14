@@ -6,12 +6,7 @@
 #include <random>
 
 struct RandomDice{
-    static std::default_random_engine rand_engine;        //Random number engine
+    static std::mt19937 rand_engine;                  //Random number engine; uses default seed
     static std::uniform_int_distribution<> rand;     //Generates a random number,
-
+    static int generate();
 };
-
-//Here temporarily while no main function exists in the program.
-int main(){
-    return 0;
-}
