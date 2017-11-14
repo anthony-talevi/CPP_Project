@@ -4,10 +4,8 @@
 */
 
 //Consider making more random by changing the seed.
-#ifndef RANDDICE
-#define RANDDICE
 
-#include<random>
+#include <random>
 #include "RandomDice.h"
 #include <iostream>
 
@@ -17,5 +15,3 @@ std::uniform_int_distribution<> RandomDice::rand = std::uniform_int_distribution
 int RandomDice::generate(){
     return rand(rand_engine);
 }
-
-#endif

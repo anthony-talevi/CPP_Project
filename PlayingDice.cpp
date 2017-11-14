@@ -1,8 +1,10 @@
 #include <iostream>
-int main(){
+
+int main() {
     std::cout << "Welcome!  Which version would you like to play?" << std::endl;
     std::cout << "Enter '0' for Qwinto, enter '1' for Qwixx" << std::endl;
     char game;
+    
     while(true){
         std::cin >> game;
 
