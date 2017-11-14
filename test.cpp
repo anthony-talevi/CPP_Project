@@ -3,7 +3,6 @@
 
 #include "RandomDice.cpp"
 #include "Dice.cpp"
-#include "Colour.h"
 
 int main(){
     //Colour c = RED;
