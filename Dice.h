@@ -3,7 +3,11 @@
     Author: Anthony Talevi
 */
 
-#include "RandomDice.cpp"
+#include "RandomDice.h"
+
+#ifndef _DICE_H
+#define _DICE_H
+
 enum struct Colour {RED, YELLOW, GREEN, BLUE, WHITE};
 
 class Dice{
@@ -19,3 +23,5 @@ class Dice{
 
     //Needs to overload insertion operator
 };
+
+#endif // _DICE_H

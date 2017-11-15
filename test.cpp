@@ -1,8 +1,8 @@
 //Here temporarily while no main function exists in the program.
 //Also using for testing of built classes
 
-#include "RandomDice.cpp"
-#include "Dice.cpp"
+#include "RandomDice.h"
+#include "Dice.h"
 
 int main(){
     //Colour c = RED;

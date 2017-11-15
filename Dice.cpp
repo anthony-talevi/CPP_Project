@@ -2,11 +2,12 @@
     CPP file for Dice class
     Author: Anthony Talevi
 */
-#ifndef DICE
-#define DICE
+
+#include <iostream>
 
 #include "Dice.h"
-#include <iostream>
+#include "RandomDice.h"
+
 Dice::Dice(Colour col): c(col){};
 
 int Dice::roll(RandomDice& rd){
@@ -14,5 +15,3 @@ int Dice::roll(RandomDice& rd){
         std::cout << rd.generate() << std::endl;
     }
 }
-
-#endif
