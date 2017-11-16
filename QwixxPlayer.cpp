@@ -1,5 +1,11 @@
-#include "Player.h"
+#include "QwixxPlayer.h"
 
-class QwixxPlayer:public Player {
+QwixxPlayer::QwixxPlayer(std::string name): Player(name) {};
+
+void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 	
-};
+}
+
+void QwixxPlayer::inputBeforeRoll(RollOfDice& rd) {
+	
+}
