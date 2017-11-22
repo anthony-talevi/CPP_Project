@@ -5,7 +5,6 @@
 #include "Dice.h"
 
 int main(){
-    //Colour c = RED;
     RandomDice r;
     Dice d(Colour::RED);
     d.roll(r);
