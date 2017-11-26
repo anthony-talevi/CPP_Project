@@ -3,26 +3,31 @@
     Author: Anthony Talevi
 */
 
-#include "RandomDice.h"
-
 #ifndef _DICE_H
 #define _DICE_H
 
-enum struct Colour {RED, YELLOW, GREEN, BLUE, WHITE};
+#include "RandomDice.h"
+#include <iostream>
+#include <string>
+
+enum struct Colour {RED, YELLOW, GREEN, BLUE,
+                    WHITE};
+
 
 class Dice{
 
     Colour c;
-    static constexpr int possible_faces[6] = {1,2,3,4,5,6};
-    int current_face;
+    int current_face = 0;   //Defaults to zero because a 1-6 die cannot be zero,
+                            //So this indicates an error to the progammer
 
+    //Lookup table for enum Colour
     public:
         Dice(Colour col);
         int roll(RandomDice& rd);
         bool compareCol(Dice d);
+        friend std::ostream& operator<<(std::ostream&, const Dice&);
+        std::string getColour() const;
 
-
-    //Needs to overload insertion operator
     //Overload the == operator to replace compareCol
     //and make necessary changes to rest of code
 };

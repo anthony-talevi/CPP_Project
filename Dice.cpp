@@ -3,21 +3,44 @@
     Author: Anthony Talevi
 */
 
-#include <iostream>
-
 #include "Dice.h"
-#include "RandomDice.h"
+#include "RandomDice.cpp"
 
 Dice::Dice(Colour col): c(col){};
 
 int Dice::roll(RandomDice& rd){
-    for(int i=0; i< 10; ++i){
-        std::cout << rd.generate() << std::endl;
-    }
+    current_face = rd.generate();
+    return current_face;
 }
 
 //Returns true if this and d are the same colour.
 bool Dice::compareCol(Dice d){
     if(this->c == d.c){return true;}
     else{return false;}
+}
+
+std::string Dice::getColour()const{
+    switch(c){
+
+        case Colour::RED :
+            return "Red";
+
+        case Colour::YELLOW :
+            return "Yellow";
+
+        case Colour::GREEN :
+            return "Green";
+
+        case Colour::BLUE :
+            return "Blue";
+
+        case Colour::WHITE :
+            return "White";
+    }
+
+}
+
+std::ostream& operator<<(std::ostream& output, const Dice& d){
+    output << "Colour: " << d.getColour() << " Face: " << d.current_face << std::endl;
+    return output;
 }
