@@ -16,6 +16,7 @@ public:
 protected:
 	virtual void inputBeforeRoll(RollOfDice& rd) =0;
 	virtual void inputAfterRoll(RollOfDice& rd) =0;
+	ScoreSheet ss;
 private:
 	bool active;
 	std::string playerName;

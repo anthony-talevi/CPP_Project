@@ -30,4 +30,5 @@ int main() {
     }
     
     ss->setTotal();
+	ss->print(std::cout);
 }

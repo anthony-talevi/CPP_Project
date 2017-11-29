@@ -9,6 +9,7 @@ public:
 protected:
 	bool validate(RollOfDice rd, Colour c, int offset);
 	void calcTotal();
+	void printSheet(std::ostream& os);
 private:
 	const std::string test = "Qwixx";
 };

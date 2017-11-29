@@ -3,3 +3,10 @@
 *.dev
 *.o
 *.exe
+*.project
+Makefile
+Final.txt
+Final.mk
+cpp.workspace
+Debug/
+.codelite/
