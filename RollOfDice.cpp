@@ -28,6 +28,18 @@ void RollOfDice::rmv(Dice d){
         }
     }
 }
+
+//Conversion operator
+RollOfDice::operator int() const{
+    int ret_value=0;
+    for(Dice d : *this){
+        ret_value += d.getCurrentFace();
+    }
+    return ret_value;
+}
+
+
+
 //Return an iterator for RollOfDice
 vector<Dice>::iterator RollOfDice::begin(){
     return dice_vec.begin();

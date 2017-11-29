@@ -37,8 +37,12 @@ std::string Dice::getColour()const{
         case Colour::WHITE :
             return "White";
     }
-
 }
+
+int Dice::getCurrentFace() const{
+    return current_face;
+}
+
 
 std::ostream& operator<<(std::ostream& output, const Dice& d){
     output << "Colour: " << d.getColour() << " Face: " << d.current_face << std::endl;

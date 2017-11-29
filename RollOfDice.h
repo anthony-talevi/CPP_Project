@@ -27,6 +27,9 @@ class RollOfDice {
 		//Removes a Dice from the structure
 		void rmv(Dice d);
 
+		//Implicit conversion to int
+		operator int() const;
+
 		//Returns a pointer to 1st element in the vector.
 		//Used for iterators that modify the structure
 		vector<Dice>::iterator begin();
