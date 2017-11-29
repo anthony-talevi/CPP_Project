@@ -1,3 +1,7 @@
+/*
+*   Author: Anthony Talevi
+*   
+*/
 #include "QwintoRow.h"
 
 template<Colour C>
