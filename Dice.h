@@ -3,10 +3,10 @@
     Author: Anthony Talevi
 */
 
-#include "RandomDice.h"
-
 #ifndef _DICE_H
 #define _DICE_H
+
+#include "RandomDice.h"
 
 enum struct Colour {RED, YELLOW, GREEN, BLUE, WHITE};
 

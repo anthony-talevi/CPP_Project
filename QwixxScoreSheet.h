@@ -1,7 +1,7 @@
-#include "ScoreSheet.h"
-
 #ifndef _QWIXX_SCORE_SHEET_H
 #define _QWIXX_SCORE_SHEET_H
+
+#include "ScoreSheet.h"
 
 class QwixxScoreSheet:public ScoreSheet {
 public:

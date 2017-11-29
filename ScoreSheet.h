@@ -1,11 +1,10 @@
+#ifndef _SCORE_SHEET_H
+#define _SCORE_SHEET_H
+
 #include <string>
 
 #include "RollOfDice.h"
 #include "Dice.h"
-#include "Player.h"
-
-#ifndef _SCORE_SHEET_H
-#define _SCORE_SHEET_H
 
 class ScoreSheet {
 public:

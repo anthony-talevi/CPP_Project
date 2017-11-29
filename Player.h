@@ -1,9 +1,10 @@
+#ifndef _PLAYER_H
+#define _PLAYER_H
+
 #include <string>
 
 #include "RollOfDice.h"
-
-#ifndef _PLAYER_H
-#define _PLAYER_H
+#include "ScoreSheet.h"
 
 class Player {
 public:
@@ -16,7 +17,7 @@ public:
 protected:
 	virtual void inputBeforeRoll(RollOfDice& rd) =0;
 	virtual void inputAfterRoll(RollOfDice& rd) =0;
-	ScoreSheet ss;
+	ScoreSheet* ss;
 private:
 	bool active;
 	std::string playerName;

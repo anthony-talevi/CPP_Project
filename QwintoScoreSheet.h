@@ -1,9 +1,9 @@
+#ifndef _QWINTO_SCORE_SHEET_H
+#define _QWINTO_SCORE_SHEET_H
+
 #include "ScoreSheet.h"
 #include "Dice.h"
 #include "QwintoRow.cpp"
-
-#ifndef _QWINTO_SCORE_SHEET_H
-#define _QWINTO_SCORE_SHEET_H
 
 class QwintoScoreSheet:public ScoreSheet {
 public:

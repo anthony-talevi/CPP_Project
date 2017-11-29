@@ -3,10 +3,10 @@
     Author: Anthony Talevi
 */
 
-#include <random>
-
 #ifndef _RANDOM_DICE_H
 #define _RANDOM_DICE_H
+
+#include <random>
 
 struct RandomDice{
     static std::mt19937 rand_engine;                  //Random number engine; uses default seed

@@ -1,7 +1,7 @@
-#include "Player.h"
-
 #ifndef _QWINTO_PLAYER_H
 #define _QWINTO_PLAYER_H
+
+#include "Player.h"
 
 class QwintoPlayer: public Player {
 public:

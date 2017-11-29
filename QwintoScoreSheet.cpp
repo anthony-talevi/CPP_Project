@@ -14,9 +14,10 @@ bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 }
 
 void QwintoScoreSheet::printSheet(std::ostream& os) {
-	redRow.printRow(os);
-	yellowRow.printRow(os);
-	blueRow.printRow(os);
+	os << "Player name: " << playerName << std::endl;
+	os << redRow;
+	os << yellowRow;
+	os << blueRow;
 	
 	os << "Failed throws: ";
 	printZero(os, failedThrows[0]);
