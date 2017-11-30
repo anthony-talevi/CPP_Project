@@ -3,8 +3,11 @@
 #include "ScoreSheet.h"
 #include "QwixxScoreSheet.h"
 #include "QwintoScoreSheet.h"
+#include "Player.h"
+#include "QwixxPlayer.h"
+#include "QwintoPlayer.h"
 
-int main() {
+/*int main() {
     std::cout << "Welcome!  Which version would you like to play?" << std::endl;
     std::cout << "Enter '0' for Qwinto, enter '1' for Qwixx" << std::endl;
     char game;
@@ -30,4 +33,5 @@ int main() {
     }
     
     ss->setTotal();
-}
+	ss->print(std::cout);
+}*/

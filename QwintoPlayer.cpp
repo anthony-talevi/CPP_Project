@@ -1,5 +1,11 @@
-#include "Player.h"
+#include "QwintoPlayer.h"
 
-class QwintoPlayer:public Player {
+QwintoPlayer::QwintoPlayer(std::string name): Player(name) {};
+
+void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
 	
-};
+}
+
+void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
+	
+}

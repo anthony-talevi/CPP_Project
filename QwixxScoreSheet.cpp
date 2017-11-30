@@ -11,3 +11,7 @@ void QwixxScoreSheet::calcTotal() {
 bool QwixxScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 	return 0;
 }
+
+void QwixxScoreSheet::printSheet(std::ostream& os) {
+	
+}

@@ -7,6 +7,8 @@
 #define _RANDOM_DICE_H
 #include <random>
 
+#include <random>
+
 struct RandomDice{
     static std::mt19937 rand_engine;                  //Random number engine; uses default seed
     static std::uniform_int_distribution<> rand;     //Generates a random number,

@@ -7,12 +7,17 @@
 #define _DICE_H
 
 #include "RandomDice.h"
+<<<<<<< HEAD
 #include <iostream>
 #include <string>
 
 enum struct Colour {RED, YELLOW, GREEN, BLUE,
                     WHITE};
 
+=======
+
+enum struct Colour {RED, YELLOW, GREEN, BLUE, WHITE};
+>>>>>>> remotes/origin/connor
 
 class Dice{
 
