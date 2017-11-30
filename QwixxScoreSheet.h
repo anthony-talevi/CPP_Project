@@ -1,8 +1,3 @@
-<<<<<<< HEAD
- #include "ScoreSheet.h"
-
-=======
->>>>>>> remotes/origin/connor
 #ifndef _QWIXX_SCORE_SHEET_H
 #define _QWIXX_SCORE_SHEET_H
 

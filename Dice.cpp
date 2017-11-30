@@ -4,7 +4,7 @@
 */
 
 #include "Dice.h"
-#include "RandomDice.cpp"
+#include "RandomDice.h"
 
 Dice::Dice(Colour col): c(col){};
 

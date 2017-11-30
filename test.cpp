@@ -1,3 +1,6 @@
+//Here temporarily while no main function exists in the program.
+//Also using for testing of built classes
+
 #include <iostream>
 
 #include "RandomDice.h"
@@ -19,15 +22,15 @@ int main(){
     /*RandomDice r;
     Dice d(Colour::RED);
     d.roll(r);*/
-
+    
     cout << std::boolalpha;
-
+    
     //QwintoRow tests
     bool testQwintoRow = true;
     if (testQwintoRow) {
     	cout << "QwintoRow Tests";
     	someSpace();
-
+    	
 	    QwintoRow<Colour::RED> qwRowRed;
 	    cout << qwRowRed;
 	    cout << "validating (2,4): " << qwRowRed.validate(2,4) << endl;
@@ -40,23 +43,22 @@ int main(){
 	    qwRowRed[1] = 3;
 	    cout << "validating (3,18): " << qwRowRed.validate(3,18) << endl;
 	    cout << qwRowRed;
-
+	    
 	    someSpace();
 	}
-
+    
     //QwintoScoreSheet tests
     bool testQwintoScoreSheet = true;
     if (testQwintoScoreSheet) {
     	cout << "QwintoScoreSheet Tests";
     	someSpace();
-
+    	
 	    ScoreSheet* ss;
 	    ss = new QwintoScoreSheet("Test");
 	    ss->print(cout);
-
+	    
 	    delete ss;
 	}
-
->>>>>>> remotes/origin/connor
+    
     return 0;
 }
