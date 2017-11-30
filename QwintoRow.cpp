@@ -114,8 +114,6 @@ private:
 		
 		return retVal;
 	}
-	
-	//enum struct Colour {RED, YELLOW, GREEN, BLUE, WHITE};
 };
 
-#endif
+#endif //_QWINTO_ROW_H

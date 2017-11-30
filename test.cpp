@@ -2,12 +2,11 @@
 //Also using for testing of built classes
 
 #include <iostream>
+#include <vector>
+#include <list>
 
-#include "RandomDice.h"
-#include "Dice.h"
-#include "QwintoRow.cpp"
-#include "ScoreSheet.h"
 #include "QwintoScoreSheet.h"
+#include "QwixxScoreSheet.h"
 
 using std::cout;
 using std::endl;
@@ -26,7 +25,7 @@ int main(){
     cout << std::boolalpha;
     
     //QwintoRow tests
-    bool testQwintoRow = true;
+    bool testQwintoRow = false;
     if (testQwintoRow) {
     	cout << "QwintoRow Tests";
     	someSpace();
@@ -46,9 +45,29 @@ int main(){
 	    
 	    someSpace();
 	}
+	
+	//QwixxRow tests
+	bool testQwixxRow = true;
+	if (testQwixxRow) {
+		cout << "QwixxRow Tests";
+		someSpace();
+		
+		QwixxRow<std::vector<int>, Colour::RED> qxRowRed;
+		QwixxRow<std::list<int>, Colour::GREEN> qxRowGreen;
+		
+		cout << qxRowRed;
+		cout << qxRowGreen;
+		
+		qxRowRed += 2;
+		qxRowRed += 6;
+		qxRowGreen += 4;
+		
+		cout << qxRowRed;
+		cout << qxRowGreen;
+	}
     
     //QwintoScoreSheet tests
-    bool testQwintoScoreSheet = true;
+    bool testQwintoScoreSheet = false;
     if (testQwintoScoreSheet) {
     	cout << "QwintoScoreSheet Tests";
     	someSpace();

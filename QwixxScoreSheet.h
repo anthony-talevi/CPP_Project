@@ -2,6 +2,8 @@
 #define _QWIXX_SCORE_SHEET_H
 
 #include "ScoreSheet.h"
+#include "Dice.h"
+#include "QwixxRow.cpp"
 
 class QwixxScoreSheet:public ScoreSheet {
 public:
