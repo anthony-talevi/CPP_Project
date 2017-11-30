@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "QwintoScoreSheet.h"
+#include "ScoreSheet.cpp"
 
 QwintoScoreSheet::QwintoScoreSheet(std::string name): ScoreSheet(name, 0, 0) {
 }
