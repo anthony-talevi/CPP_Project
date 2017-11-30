@@ -24,19 +24,19 @@ public:
 		}
 	}
 	~QwintoRow(){}
-
+	
 	//overloads the subscript operator to access column
 	int& operator[](const int pos) {
 		return column[pos];
 	}
-
+	
 	//validates that it is ok to place 'id' in position 'position'
 	bool validate(int position, int id) {
 		//make sure the spot isn't already taken
 		if (column[position] != 0) {
 			return false;
 		}
-
+		
 		//check for the same number & if there is a smaller number after
 		for (int i = 0; i < 10; i++) {
 			//first half checks for the same number
@@ -45,7 +45,7 @@ public:
 				return false;
 			}
 		}
-
+		
 		//all tests passed
 		return true;
 	}
@@ -58,7 +58,7 @@ public:
 			{'|','|','|','|','|','|','|','%','%','|','|'},
 			{'|','|','%','%','|','|','|','|','|','%','%'},
 		};
-
+		
 		//apply colour specific changes
 		switch (C) {
 			case Colour::RED:
@@ -77,27 +77,27 @@ public:
 				h = 2;
 				break;
 		}
-
+		
 		//draw the row
 		for (auto i = 0 ; i < 10; i++) {
 			os << colText[h][i] << twoSpaces(qr.column[i]);
 		}
 		os << colText[h][10] << std::endl; //finish off the row
-
+		
 		//add bottom topper for BLUE row
 		switch(C) {
 			case Colour::BLUE:
 				os << "        -------------------------------" << std::endl;
 				break;
 		}
-
+		
 		return os;
 	}
-
+	
 private:
 	//values are stored in an array of ints
 	int column[10] = {0};
-
+	
 	//helper function to output spaces when needed
 	static std::string twoSpaces(const int n) {
 		//handle special cases
@@ -105,18 +105,17 @@ private:
 			return "XX";
 		if  (n == 0)
 			return "  ";
-
+		
 		//build string to return
 		std::string retVal = "";
-
+		
 		if (n < 10) retVal += " ";
 		retVal += std::to_string(n);
-
+		
 		return retVal;
 	}
-
+	
 	//enum struct Colour {RED, YELLOW, GREEN, BLUE, WHITE};
 };
 
 #endif
->>>>>>> remotes/origin/connor
