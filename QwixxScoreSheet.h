@@ -1,6 +1,9 @@
 #ifndef _QWIXX_SCORE_SHEET_H
 #define _QWIXX_SCORE_SHEET_H
 
+#include <vector>
+#include <list>
+
 #include "ScoreSheet.h"
 #include "Dice.h"
 #include "QwixxRow.cpp"
@@ -13,7 +16,10 @@ protected:
 	void calcTotal();
 	void printSheet(std::ostream& os);
 private:
-	const std::string test = "Qwixx";
+	QwixxRow<std::vector<int>, Colour::RED> redRow;
+	QwixxRow<std::vector<int>, Colour::YELLOW> yellowRow;
+	QwixxRow<std::list<int>, Colour::GREEN> greenRow;
+	QwixxRow<std::list<int>, Colour::BLUE> blueRow;
 };
 
 #endif // _QWIXX_SCORE_SHEET_H

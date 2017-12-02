@@ -11,6 +11,7 @@ public:
 	ScoreSheet();
 	ScoreSheet(std::string playerName, int failedAttempts=0, int score=0);
 	bool score(RollOfDice rd, Colour c, int offset=-1);
+	bool fail();
 	int setTotal();
 	void print(std::ostream& os);
 protected:

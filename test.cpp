@@ -18,15 +18,11 @@ void someSpace() {
 }
 
 int main(){
-    //Colour c = RED;
-    /*RandomDice r;
-    Dice d(Colour::RED);
-    d.roll(r);*/
-    
+	//makes a bool value true/false   
     cout << std::boolalpha;
     
     //QwintoRow tests
-    bool testQwintoRow = true;
+    bool testQwintoRow = false;
     if (testQwintoRow) {
     	cout << "QwintoRow Tests";
     	someSpace();
@@ -48,7 +44,7 @@ int main(){
 	}
 	
 	//QwixxRow tests
-	bool testQwixxRow = true;
+	bool testQwixxRow = false;
 	if (testQwixxRow) {
 		cout << "QwixxRow Tests";
 		someSpace();
@@ -99,7 +95,7 @@ int main(){
 	}
     
     //QwintoScoreSheet tests
-    bool testQwintoScoreSheet = true;
+    bool testQwintoScoreSheet = false;
     if (testQwintoScoreSheet) {
     	cout << "QwintoScoreSheet Tests";
     	someSpace();
@@ -112,10 +108,19 @@ int main(){
 	}
 	
 	//QwixxScoreSheet tests
-	bool testQwixxScoreSheet = false;
+	bool testQwixxScoreSheet = true;
 	if (testQwixxScoreSheet) {
 		cout << "QwixxScoreSheet Tests";
 		someSpace();
+		
+		ScoreSheet* ss;
+		ss = new QwixxScoreSheet("Test");
+		ss->print(cout);
+		ss->fail();
+		ss->fail();
+		ss->print(cout);
+		
+		delete ss;
 	}
     
     return 0;
