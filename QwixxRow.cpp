@@ -10,15 +10,25 @@
 
 template <class T, Colour C> class QwixxRow {
 public:
-	QwintoRow() {
-		
-	}
+	QwintoRow() {}
+	~QwixxRow() {}
 	
+	//overload the compound += operator for insertion of an int
+	//does error checking on list size, locked rows and invalid entry order
 	QwixxRow& operator+=(int a) {
+		if (locked)
+			throw std::overflow_error("unable to place: " + std::to_string(a) + ". Row locked");
+		
+		//handle empty list exception case
 		if (myList.size() == 0) {
 			myList.emplace_back(a);
 
 			return *this;
+		}
+		
+		//handle overflow just in case
+		if (myList.size() == 11) {
+			throw std::overflow_error("unable to place: " + std::to_string(a) + ". Row full");
 		}
 		
 		//throw error message unique by type
@@ -27,28 +37,29 @@ public:
 			case Colour::RED:
 			case Colour::YELLOW:
 				if (a < end) {
-					throw std::range_error("too small");
+					throw std::range_error("unable to place: " + std::to_string(a) + ". Too small");
 				}
 				break;
 			case Colour::GREEN:
 			case Colour::BLUE:
 				if (a > end) {
-					throw std::range_error("too large");
+					throw std::range_error("unable to place: " + std::to_string(a) + ". too large");
 				}
 				break;
 		}
 		
-		//TODO: handle rule for proper insertion of elements
-		
+		//add element to list
 		myList.emplace_back(a);
 		
 		return *this;
 	}
 	
+	//locks the row
 	void lock() {
 		locked = true;
 	}
 	
+	//insertion operator overload
 	friend std::ostream& operator<<(std::ostream& os, const QwixxRow& qr) {
 		//start row
 		switch (C) {
@@ -66,44 +77,75 @@ public:
 				break;
 		}
 		
-		//need to display row
-		if (myList.size() == 0) //TODO display properly for FW/BW
-			os << "|  |  |  |  |  |  |  |  |  |  |  ";
+		//handle empty row special case
+		if (qr.myList.size() == 0) {
+			switch (C) {
+				case Colour::RED:
+				case Colour::YELLOW:
+					os << "| 2| 3| 4| 5| 6| 7| 8| 9|10|11|12";
+					break;
+				case Colour::GREEN:
+				case Colour::BLUE:
+					os << "|12|11|10| 9| 8| 7| 6| 5| 4| 3| 2";
+					break;
+			}
+		}
 		else {
-			typename T::iterator it = myList.begin();
+			//iterator is used to place the XX on the board
+			typename T::const_iterator it = qr.myList.begin();
 			
-			for (int i = 2; i < 13; i++) {
-				if (i == *it) {
-					os << "|XX";
-					it++;
-				}
-				else {
-					if (i > 9)
-						os << "|" <<i;
-					else
-						os << "| " << i;
-				}
+			//seperate by colour
+			switch (C) {
+				//red & Yellow ascending
+				case Colour::RED:
+				case Colour::YELLOW:
+					for (int i = 2; i < 13; i++) {
+						//check if there is a match
+						if (i == *it) {
+							os << "|XX";
+							it++;
+						}
+						else {
+							if (i > 9) os << "|" << i;
+							else os << "| " << i;
+						}
+					}
+					break;
+				//green & blue descending
+				case Colour::GREEN:
+				case Colour::BLUE:
+					for (int i = 12; i > 1; i--) {
+						if (i == *it) {
+							os << "|XX";
+							it++;
+						}
+						else {
+							if (i > 9) os << "|" << i;
+							else os << "| " << i;
+						}
+					}
+					break;
 			}
 		}
 		
-		//TODO fix locked/unlocked
-		
-		/*if (locked)
+		//outputs the lock status
+		if (locked)
 			os << "| L";
 		else
-			os << "| U";*/
+			os << "| U";
 		
+		//end of line
 		os << std::endl;
 		
 		return os;
 	}
 private:
-	static T myList;
-	bool locked = false;
+	T myList;
+	static bool locked; //locked is a static variable so it affects all rows of that colour
 };
 
 //this prevents linker errors: https://stackoverflow.com/a/20642192
 template<class T, Colour C>
-T QwixxRow<T,C>::myList;
+bool QwixxRow<T,C>::locked = false;
 
 #endif // _QWIXX_ROW_H

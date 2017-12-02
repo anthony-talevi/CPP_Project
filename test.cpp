@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <stdexcept>
 
 #include "QwintoScoreSheet.h"
 #include "QwixxScoreSheet.h"
@@ -25,7 +26,7 @@ int main(){
     cout << std::boolalpha;
     
     //QwintoRow tests
-    bool testQwintoRow = false;
+    bool testQwintoRow = true;
     if (testQwintoRow) {
     	cout << "QwintoRow Tests";
     	someSpace();
@@ -55,19 +56,50 @@ int main(){
 		QwixxRow<std::vector<int>, Colour::RED> qxRowRed;
 		QwixxRow<std::list<int>, Colour::GREEN> qxRowGreen;
 		
+		cout << "Empty rows" <<endl;
+		cout << qxRowRed;
+		cout << qxRowGreen;
+		cout << endl;
+		
+		cout << "Placing 2,6,3 in red" << endl;
+		try {
+			qxRowRed += 2;
+			qxRowRed += 6;
+			qxRowRed += 3;
+		} catch (std::exception& error) {
+			cout << error.what() << endl;
+		}
+		
+		cout << "Placing 4,11 in green" << endl;
+		try {
+			qxRowGreen += 4;
+			qxRowGreen += 11;
+		} catch (std::exception& error) {
+			cout << error.what() << endl;
+		}
+		
+		cout << endl;
+		cout <<"Rows with insertions" <<endl;
 		cout << qxRowRed;
 		cout << qxRowGreen;
 		
-		qxRowRed += 2;
-		qxRowRed += 6;
-		qxRowGreen += 4;
+		cout << endl << "locking red" <<endl;
+		qxRowRed.lock();
+		try {
+			qxRowRed += 9;
+		} catch (std::exception& error) {
+			cout << error.what() << endl;
+		}
+		
+		QwixxRow<std::vector<int>, Colour::RED> qxRowRed2;
 		
 		cout << qxRowRed;
+		cout << qxRowRed2;
 		cout << qxRowGreen;
 	}
     
     //QwintoScoreSheet tests
-    bool testQwintoScoreSheet = false;
+    bool testQwintoScoreSheet = true;
     if (testQwintoScoreSheet) {
     	cout << "QwintoScoreSheet Tests";
     	someSpace();
@@ -77,6 +109,13 @@ int main(){
 	    ss->print(cout);
 	    
 	    delete ss;
+	}
+	
+	//QwixxScoreSheet tests
+	bool testQwixxScoreSheet = false;
+	if (testQwixxScoreSheet) {
+		cout << "QwixxScoreSheet Tests";
+		someSpace();
 	}
     
     return 0;
