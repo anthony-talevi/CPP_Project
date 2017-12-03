@@ -49,6 +49,21 @@ public:
 		//all tests passed
 		return true;
 	}
+	
+	//determines the score for the row
+	int score() {
+		int num = 0;
+		
+		//count the number of entries
+		for (int i = 0; i < 10; i++) {
+			if (column[i] > 0)
+				num++;
+		}
+		
+		//return the row score
+		if (num == 9) return column[9];
+		else return num;
+	}
 
 	//allows for outputing via overloading the the insertion operator
 	friend std::ostream& operator<<(std::ostream& os, const QwintoRow& qr) {

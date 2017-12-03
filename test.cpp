@@ -92,10 +92,12 @@ int main(){
 		cout << qxRowRed;
 		cout << qxRowRed2;
 		cout << qxRowGreen;
+		
+		someSpace();
 	}
     
     //QwintoScoreSheet tests
-    bool testQwintoScoreSheet = false;
+    bool testQwintoScoreSheet = true;
     if (testQwintoScoreSheet) {
     	cout << "QwintoScoreSheet Tests";
     	someSpace();
@@ -105,6 +107,7 @@ int main(){
 	    ss->print(cout);
 	    
 	    delete ss;
+	    someSpace();
 	}
 	
 	//QwixxScoreSheet tests

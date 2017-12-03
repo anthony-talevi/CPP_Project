@@ -6,6 +6,19 @@
 QwixxScoreSheet::QwixxScoreSheet(std::string name): ScoreSheet(name, 0, 0) {}
 
 void QwixxScoreSheet::calcTotal() {
+	int score = 0;
+	
+	//subtract points for failed attempts
+	score -= (failedAttempts * 5);
+	
+	//add the scores from the rows
+	score += redRow.score();
+	score += yellowRow.score();
+	score += greenRow.score();
+	score += blueRow.score();
+	
+	//assign the local variable to the class variable
+	gameScore = score;
 }
 
 bool QwixxScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
@@ -50,7 +63,14 @@ bool QwixxScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 
 //TODO: replace with overloaded << operator
 void QwixxScoreSheet::printSheet(std::ostream& os) {
-	os << "Player name: " << playerName << std::endl;
+	os << "Player name: " << playerName;
+	
+	for (auto i = 22; i > playerName.length(); i--)
+		os << " ";
+	os << "Points: ";
+	if (gameScore < 10) os << " " << gameScore << std::endl;
+	else os << gameScore << std::endl;
+	
 	os << "         ------------------------------------" << std::endl;
 	os << redRow;
 	os << "         ------------------------------------" << std::endl;

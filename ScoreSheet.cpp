@@ -25,14 +25,6 @@ int ScoreSheet::setTotal() {
 	return gameScore;
 }
 
-void ScoreSheet::printZero(std::ostream& s, int n) {
-	if (n == 0) {
-		s << ' ';
-	} else {
-		s << n << "";
-	}
-}
-
 void ScoreSheet::print(std::ostream& os) {
 	printSheet(os);
 }
