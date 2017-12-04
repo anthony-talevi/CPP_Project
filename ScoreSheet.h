@@ -17,7 +17,7 @@ protected:
 	virtual bool validate(RollOfDice rd, Colour c, int offset) = 0;
 	virtual void calcTotal() = 0;
 	virtual void printSheet(std::ostream& os) = 0;
-	void printZero(std::ostream& s, int n); 
+	void printZero(std::ostream& s, int n);
 	const std::string playerName;
 	int failedAttempts;
 	int gameScore;

@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "RollOfDice.h"
+#include "RollOfDice.cpp"
 #include "ScoreSheet.h"
 
 class Player {
@@ -18,6 +18,9 @@ protected:
 	virtual void inputBeforeRoll(RollOfDice& rd) =0;
 	virtual void inputAfterRoll(RollOfDice& rd) =0;
 	ScoreSheet* ss;
+	std::vector<Dice> removed_for_roll;		//Used to store dice temporarily
+											//for readdition to the
+											//RollOfDice after player's turn
 private:
 	bool active;
 	std::string playerName;

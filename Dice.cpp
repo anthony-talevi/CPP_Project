@@ -4,7 +4,7 @@
 */
 
 #include "Dice.h"
-#include "RandomDice.h"
+#include "RandomDice.cpp"
 
 Dice::Dice(Colour col): c(col){};
 
@@ -34,7 +34,9 @@ std::string Dice::getColour()const{
         case Colour::BLUE :
             return "Blue";
 
-        case Colour::WHITE :
+        case Colour::WHITE1 :
+            return "White";
+        case Colour::WHITE2 :
             return "White";
     }
 }
