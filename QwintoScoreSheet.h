@@ -16,6 +16,9 @@ private:
 	QwintoRow<Colour::RED> redRow;
 	QwintoRow<Colour::YELLOW> yellowRow;
 	QwintoRow<Colour::BLUE> blueRow;
+	std::vector<Dice> removed_for_roll;		//Used to store dice temporarily
+											//for readdition to the
+											//RollOfDice after player's turn
 };
 
 #endif // _QWINTO_SCORE_SHEET_H

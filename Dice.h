@@ -10,7 +10,7 @@
 #include <iostream>
 #include <string>
 
-enum struct Colour {RED, YELLOW, GREEN, BLUE, WHITE};
+enum struct Colour {RED, YELLOW, GREEN, BLUE, WHITE1, WHITE2};
 
 class Dice{
 

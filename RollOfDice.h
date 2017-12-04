@@ -25,7 +25,7 @@ class RollOfDice {
 		void add(Dice d);
 
 		//Removes a Dice from the structure
-		void rmv(Dice d);
+		Dice rmv(Dice d);
 
 		//Implicit conversion to int
 		operator int() const;

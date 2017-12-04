@@ -6,7 +6,7 @@
 */
 
 #include "RollOfDice.h"
-#include "Dice.h"
+#include "Dice.cpp"
 
 //Constructor
 //Accepts a RandomDice Object that will be used for rolls.
@@ -19,12 +19,12 @@ void RollOfDice::add(Dice d){
 }
 
 //Remove a die from the set.
-void RollOfDice::rmv(Dice d){
+Dice RollOfDice::rmv(Dice d){
     for(auto iter = begin(); iter != end(); ++iter){
         if(iter->compareCol(d)){
             dice_vec.erase(iter);
             --size;
-            return;
+            return d;
         }
     }
 }
@@ -72,16 +72,11 @@ RollOfDice RollOfDice::pair(Dice a, Dice b){
     for(Dice d : *this){
         if(d.compareCol(a)){
             ret.add(d);
-            break;
         }
-    }
-    for(Dice d : *this){
         if(d.compareCol(b)){
             ret.add(d);
-            break;
         }
     }
-
     return ret;
 }
 
