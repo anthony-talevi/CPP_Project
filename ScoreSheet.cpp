@@ -6,23 +6,23 @@ ScoreSheet::ScoreSheet(): playerName("default_name"), failedAttempts(0), gameSco
 ScoreSheet::ScoreSheet(std::string n, int f, int s): playerName(n), failedAttempts(f), gameScore(s){};
 
 bool ScoreSheet::score(RollOfDice rd, Colour c, int offset) {
-	validate(rd,c,offset);
+	return validate(rd,c,offset);
+}
+
+//user records a failed throw
+//returns true when they have more than 3 failed throws
+//returns false otherwise
+bool ScoreSheet::fail() {
+	failedAttempts++;
 	
-	return false;
+	if (failedAttempts > 3) return true;
+	else return false;
 }
 
 int ScoreSheet::setTotal() {
 	calcTotal();
 	
-	return 0;
-}
-
-void ScoreSheet::printZero(std::ostream& s, int n) {
-	if (n == 0) {
-		s << ' ';
-	} else {
-		s << n << "";
-	}
+	return gameScore;
 }
 
 void ScoreSheet::print(std::ostream& os) {

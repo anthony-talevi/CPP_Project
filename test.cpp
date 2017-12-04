@@ -2,8 +2,12 @@
 //Also using for testing of built classes
 
 #include <iostream>
+#include <vector>
+#include <list>
+#include <stdexcept>
 
-#include "QwintoScoreSheet.cpp"
+#include "QwintoScoreSheet.h"
+#include "QwixxScoreSheet.h"
 
 using std::cout;
 using std::endl;
@@ -14,15 +18,11 @@ void someSpace() {
 }
 
 int main(){
-    //Colour c = RED;
-    /*RandomDice r;
-    Dice d(Colour::RED);
-    d.roll(r);*/
-
+	  //makes a bool value true/false   
     cout << std::boolalpha;
 
     //QwintoRow tests
-    bool testQwintoRow = true;
+    bool testQwintoRow = false;
     if (testQwintoRow) {
     	cout << "QwintoRow Tests";
     	someSpace();
@@ -42,6 +42,59 @@ int main(){
 
 	    someSpace();
 	}
+  
+	//QwixxRow tests
+	bool testQwixxRow = false;
+	if (testQwixxRow) {
+		cout << "QwixxRow Tests";
+		someSpace();
+		
+		QwixxRow<std::vector<int>, Colour::RED> qxRowRed;
+		QwixxRow<std::list<int>, Colour::GREEN> qxRowGreen;
+		
+		cout << "Empty rows" <<endl;
+		cout << qxRowRed;
+		cout << qxRowGreen;
+		cout << endl;
+		
+		cout << "Placing 2,6,3 in red" << endl;
+		try {
+			qxRowRed += 2;
+			qxRowRed += 6;
+			qxRowRed += 3;
+		} catch (std::exception& error) {
+			cout << error.what() << endl;
+		}
+		
+		cout << "Placing 4,11 in green" << endl;
+		try {
+			qxRowGreen += 4;
+			qxRowGreen += 11;
+		} catch (std::exception& error) {
+			cout << error.what() << endl;
+		}
+		
+		cout << endl;
+		cout <<"Rows with insertions" <<endl;
+		cout << qxRowRed;
+		cout << qxRowGreen;
+		
+		cout << endl << "locking red" <<endl;
+		qxRowRed.lock();
+		try {
+			qxRowRed += 9;
+		} catch (std::exception& error) {
+			cout << error.what() << endl;
+		}
+		
+		QwixxRow<std::vector<int>, Colour::RED> qxRowRed2;
+		
+		cout << qxRowRed;
+		cout << qxRowRed2;
+		cout << qxRowGreen;
+		
+		someSpace();
+	}
 
     //QwintoScoreSheet tests
     bool testQwintoScoreSheet = true;
@@ -54,6 +107,23 @@ int main(){
 	    ss->print(cout);
 
 	    delete ss;
+	    someSpace();
+	}
+	
+	//QwixxScoreSheet tests
+	bool testQwixxScoreSheet = true;
+	if (testQwixxScoreSheet) {
+		cout << "QwixxScoreSheet Tests";
+		someSpace();
+		
+		ScoreSheet* ss;
+		ss = new QwixxScoreSheet("Test");
+		ss->print(cout);
+		ss->fail();
+		ss->fail();
+		ss->print(cout);
+		
+		delete ss;
 	}
 
     return 0;
