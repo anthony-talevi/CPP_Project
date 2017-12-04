@@ -13,11 +13,9 @@ protected:
 	void calcTotal();
 	void printSheet(std::ostream& os);
 private:
-	const std::string test = "Qwinto";
 	QwintoRow<Colour::RED> redRow;
 	QwintoRow<Colour::YELLOW> yellowRow;
 	QwintoRow<Colour::BLUE> blueRow;
-	int failedThrows[3] = {0};
 };
 
 #endif // _QWINTO_SCORE_SHEET_H
