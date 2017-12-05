@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "QwintoScoreSheet.h"
-#include "ScoreSheet.cpp"
+#include "ScoreSheet.h"
 
 QwintoScoreSheet::QwintoScoreSheet(std::string name): ScoreSheet(name, 0, 0) {
 }
@@ -63,8 +63,7 @@ bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 	else return false;
 }
 
-//TODO: replace with overloaded << operator
-void QwintoScoreSheet::printSheet(std::ostream& os) {
+std::ostream& QwintoScoreSheet::printSheet(std::ostream& os) const {
 	os << "Player name: " << playerName;
 	
 	for (auto i = 22; i > playerName.length(); i--)
@@ -82,4 +81,6 @@ void QwintoScoreSheet::printSheet(std::ostream& os) {
 		os << (i+1) << " ";
 	
 	os << std::endl;
+	
+	return os;
 }

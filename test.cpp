@@ -104,7 +104,7 @@ int main(){
 
 	    ScoreSheet* ss;
 	    ss = new QwintoScoreSheet("Test");
-	    ss->print(cout);
+	    cout << *ss;
 
 	    delete ss;
 	    someSpace();
@@ -118,10 +118,10 @@ int main(){
 		
 		ScoreSheet* ss;
 		ss = new QwixxScoreSheet("Test");
-		ss->print(cout);
+		cout << *ss;
 		ss->fail();
 		ss->fail();
-		ss->print(cout);
+		cout << *ss;
 		
 		delete ss;
 	}

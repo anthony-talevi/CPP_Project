@@ -19,12 +19,12 @@ bool ScoreSheet::fail() {
 	else return false;
 }
 
+std::ostream& operator<<(std::ostream& os, const ScoreSheet& ss) {
+	return ss.printSheet(os);
+}
+
 int ScoreSheet::setTotal() {
 	calcTotal();
 	
 	return gameScore;
-}
-
-void ScoreSheet::print(std::ostream& os) {
-	printSheet(os);
 }

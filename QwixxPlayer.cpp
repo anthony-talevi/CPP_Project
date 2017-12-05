@@ -1,6 +1,7 @@
 #include "QwixxPlayer.h"
-#include "Player.cpp"
-#include "ScoreSheet.cpp"
+#include "Player.h"
+#include "ScoreSheet.h"
+
 //Constructor
 QwixxPlayer::QwixxPlayer(std::string name): Player(name) {};
 

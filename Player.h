@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "RollOfDice.cpp"
+#include "RollOfDice.h"
 #include "ScoreSheet.h"
 
 class Player {

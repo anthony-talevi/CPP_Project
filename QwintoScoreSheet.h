@@ -11,7 +11,7 @@ public:
 protected:
 	bool validate(RollOfDice rd, Colour c, int offset);
 	void calcTotal();
-	void printSheet(std::ostream& os);
+	std::ostream& printSheet(std::ostream& os) const;
 private:
 	QwintoRow<Colour::RED> redRow;
 	QwintoRow<Colour::YELLOW> yellowRow;

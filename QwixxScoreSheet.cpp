@@ -61,8 +61,7 @@ bool QwixxScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 	else return false;
 }
 
-//TODO: replace with overloaded << operator
-void QwixxScoreSheet::printSheet(std::ostream& os) {
+std::ostream& QwixxScoreSheet::printSheet(std::ostream& os) const {
 	os << "Player name: " << playerName;
 	
 	for (auto i = 22; i > playerName.length(); i--)
@@ -86,4 +85,6 @@ void QwixxScoreSheet::printSheet(std::ostream& os) {
 		os << (i+1) << " ";
 	
 	os << std::endl;
+	
+	return os;
 }
