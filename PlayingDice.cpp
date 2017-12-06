@@ -4,16 +4,16 @@
 #include "ScoreSheet.h"
 #include "QwixxScoreSheet.h"
 #include "QwintoScoreSheet.h"
-// #include "Player.h"
-#include "QwixxPlayer.cpp"
-#include "QwintoPlayer.cpp"
+#include "Player.h"
+#include "QwixxPlayer.h"
+#include "QwintoPlayer.h"
 
 int getNumPlayers(){
     int numPlayers;
     while(true){
         std::cout << "How many players will be playing?" << std::endl;
         std::cin >> numPlayers;
-        if(numPlayers > 0){
+        if(numPlayers > 0  && numPlayers < 4){
             return numPlayers;
         }
         else{

@@ -64,6 +64,18 @@ public:
 		if (num == 9) return column[9];
 		else return num;
 	}
+	
+	bool full() const {
+		int sum = 0;
+		
+		for (int i = 0; i < 10; i++) {
+			if (column[i] > 0)
+			sum++;
+		}
+		
+		if (sum == 9) return true;
+		else return false;
+	}
 
 	//allows for outputing via overloading the the insertion operator
 	friend std::ostream& operator<<(std::ostream& os, const QwintoRow& qr) {

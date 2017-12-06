@@ -17,7 +17,7 @@ void someSpace() {
 		cout << std::endl;
 }
 
-int main(){
+/*int main(){
 	  //makes a bool value true/false   
     cout << std::boolalpha;
 
@@ -127,4 +127,4 @@ int main(){
 	}
 
     return 0;
-}
+}*/

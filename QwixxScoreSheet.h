@@ -11,6 +11,7 @@
 class QwixxScoreSheet:public ScoreSheet {
 public:
 	QwixxScoreSheet(std::string name);
+	bool operator!() const;
 protected:
 	bool validate(RollOfDice rd, Colour c, int offset);
 	void calcTotal();

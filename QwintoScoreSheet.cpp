@@ -63,6 +63,21 @@ bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 	else return false;
 }
 
+bool QwintoScoreSheet::operator!() const {
+	//4+ failed attempts for a player and the game is over
+	if (failedAttempts > 3) return true;
+	
+	//2+ full rows means the game is over
+	int sum = 0;
+	if (redRow.full()) sum++;
+	if (yellowRow.full()) sum++;
+	if (blueRow.full()) sum++;
+	
+	if (sum > 1) return true;
+	
+	return false;
+}
+
 std::ostream& QwintoScoreSheet::printSheet(std::ostream& os) const {
 	os << "Player name: " << playerName;
 	

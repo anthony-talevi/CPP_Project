@@ -14,6 +14,7 @@ public:
 	bool score(RollOfDice rd, Colour c, int offset=-1);
 	bool fail();
 	int setTotal();
+	virtual bool operator!() const = 0;
 	friend std::ostream& operator<< (std::ostream& os, const ScoreSheet& ss);
 protected:
 	virtual bool validate(RollOfDice rd, Colour c, int offset) = 0;

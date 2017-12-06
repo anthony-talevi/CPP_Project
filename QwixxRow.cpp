@@ -50,6 +50,18 @@ public:
 
 		//add element to list
 		myList.emplace_back(a);
+		
+		//lock list on insertion of element farthest to the right
+		switch (C) {
+			case Colour::RED:
+			case Colour::YELLOW:
+				if (a == 12) lock();
+				break;
+			case Colour::GREEN:
+			case Colour::BLUE:
+				if (a == 2) lock();
+				break;
+		}
 
 		return *this;
 	}
@@ -58,6 +70,11 @@ public:
 	void lock() {
 		locked = true;
 		myLock = true;
+	}
+	
+	//returns whether or not the row is locked
+	bool lockStatus() const {
+		return locked;
 	}
 
 	//calculates the score of the row
