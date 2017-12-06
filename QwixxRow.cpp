@@ -55,11 +55,11 @@ public:
 		switch (C) {
 			case Colour::RED:
 			case Colour::YELLOW:
-				if (a == 12) lock();
+				if (a == 12 && myList.size() >= 5) lock();
 				break;
 			case Colour::GREEN:
 			case Colour::BLUE:
-				if (a == 2) lock();
+				if (a == 2 && myList.size() >= 5) lock();
 				break;
 		}
 
