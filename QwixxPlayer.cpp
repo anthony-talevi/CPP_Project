@@ -1,8 +1,10 @@
 #include "QwixxPlayer.h"
 #include "Player.cpp"
-#include "ScoreSheet.cpp"
+#include "QwixxScoreSheet.cpp"
 //Constructor
-QwixxPlayer::QwixxPlayer(std::string name): Player(name) {};
+QwixxPlayer::QwixxPlayer(std::string name): Player(name) {
+	ss = new QwixxScoreSheet(name);
+};
 
 void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 

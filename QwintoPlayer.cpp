@@ -1,10 +1,12 @@
 #include "QwintoPlayer.h"
 #include "Player.cpp"
-#include "RollOfDice.cpp"
-#include "ScoreSheet.cpp"
+#include "RollOfDice.h"
+#include "QwintoScoreSheet.cpp"
 
 //Constructor
-QwintoPlayer::QwintoPlayer(std::string name): Player(name) {};
+QwintoPlayer::QwintoPlayer(std::string name): Player(name) {
+	ss = new QwintoScoreSheet(name);
+};
 
 void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
 
