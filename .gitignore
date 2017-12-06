@@ -10,3 +10,4 @@ Final.mk
 cpp.workspace
 Debug/
 .codelite/
+*.gch
