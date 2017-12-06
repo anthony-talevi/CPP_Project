@@ -14,10 +14,10 @@ public:
 	void activate();
 	void deactivate();
 	std::string getName();
-protected:
+	ScoreSheet* ss;
 	virtual void inputBeforeRoll(RollOfDice& rd) =0;
 	virtual void inputAfterRoll(RollOfDice& rd) =0;
-	ScoreSheet* ss;
+protected:
 	std::vector<Dice> removed_for_roll;		//Used to store dice temporarily
 											//for readdition to the
 											//RollOfDice after player's turn

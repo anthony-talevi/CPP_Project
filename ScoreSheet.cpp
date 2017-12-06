@@ -23,6 +23,8 @@ std::ostream& operator<<(std::ostream& os, const ScoreSheet& ss) {
 	return ss.printSheet(os);
 }
 
+
+//scores the sheet and returns the score
 int ScoreSheet::setTotal() {
 	calcTotal();
 	

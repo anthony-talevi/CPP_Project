@@ -6,7 +6,6 @@
 class QwixxPlayer: public Player {
 public:
 	QwixxPlayer(std::string name);
-protected:
 	void inputAfterRoll(RollOfDice& rd);
 	void inputBeforeRoll(RollOfDice& rd);
 private:
