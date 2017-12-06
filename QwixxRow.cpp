@@ -10,27 +10,27 @@
 
 template <class T, Colour C> class QwixxRow {
 public:
-	QwintoRow() {}
+	QwixxRow() {}
 	~QwixxRow() {}
-	
+
 	//overload the compound += operator for insertion of an int
 	//does error checking on list size, locked rows and invalid entry order
 	QwixxRow& operator+=(int a) {
 		if (locked)
 			throw std::overflow_error("unable to place: " + std::to_string(a) + ". Row locked");
-		
+
 		//handle empty list exception case
 		if (myList.size() == 0) {
 			myList.emplace_back(a);
 
 			return *this;
 		}
-		
+
 		//handle overflow just in case
 		if (myList.size() == 11) {
 			throw std::overflow_error("unable to place: " + std::to_string(a) + ". Row full");
 		}
-		
+
 		//throw error message unique by type
 		auto end = myList.back();
 		switch (C) {
@@ -47,27 +47,27 @@ public:
 				}
 				break;
 		}
-		
+
 		//add element to list
 		myList.emplace_back(a);
-		
+
 		return *this;
 	}
-	
+
 	//locks the row
 	void lock() {
 		locked = true;
 		myLock = true;
 	}
-	
+
 	//calculates the score of the row
 	int score() {
 		int score = 0;
 		int temp = myList.size();
-		
+
 		//if you were the one to lock the row you get a bonus
 		if (myLock) temp++;
-		
+
 		//determine the score
 		switch (temp) {
 			case  1: score =  1; break;
@@ -84,10 +84,10 @@ public:
 			case 12: score = 78; break;
 			default: score =  0; break;
 		}
-		
+
 		return score;
 	}
-	
+
 	//insertion operator overload
 	friend std::ostream& operator<<(std::ostream& os, const QwixxRow& qr) {
 		//start row
@@ -105,7 +105,7 @@ public:
 				os << "Blue     ";
 				break;
 		}
-		
+
 		//handle empty row special case
 		if (qr.myList.size() == 0) {
 			switch (C) {
@@ -122,7 +122,7 @@ public:
 		else {
 			//iterator is used to place the XX on the board
 			typename T::const_iterator it = qr.myList.begin();
-			
+
 			//seperate by colour
 			switch (C) {
 				//red & Yellow ascending
@@ -156,16 +156,16 @@ public:
 					break;
 			}
 		}
-		
+
 		//outputs the lock status
 		if (locked)
 			os << "| L";
 		else
 			os << "| U";
-		
+
 		//end of line
 		os << std::endl;
-		
+
 		return os;
 	}
 private:
