@@ -33,25 +33,48 @@ void QwintoScoreSheet::calcTotal() {
 	gameScore = score;
 }
 
+//this function ensures that each value in each column is unique
+bool QwintoScoreSheet::validateColumn(int r, int y, int b, int roll) {
+	int rr, yy, bb;
+	
+	//get the values from the rows and prevent OOB errors by defaulting to -1
+	if (r < 0 || r > 9) rr = -1;
+	else rr = redRow[r];
+	if (y < 0 || y > 9) yy = -1;
+	else yy = yellowRow[y];
+	if (b < 0 || b > 9) bb = -1;
+	else bb = blueRow[b];
+	
+	//check and make sure none of the columns already contain the roll
+	if ((rr == roll && rr > 0) || (yy == roll && yy > 0) || (bb == roll && bb > 0)) return false;
+	else return true;
+}
+
+//this function will try and play a RollOfDice into the Row "c" at the spot "offset"
+//must meet the validation rules of a row (ascending order) and column (unique values)
+//returns true if the "rd" was placed, false if it was not
 bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
-	bool ok;
+	bool row, col;
 
 	//switch the colour
 	switch (c) {
 		//same logic for each colour
 		case Colour::RED:
-			//call the validate function to see if we can insert
-			ok = redRow.validate(offset, rd);
-			//if we can insert the piece
-			if (ok) redRow[offset] = rd;
+			//check the rules for the row
+			row = redRow.validate(offset, rd);
+			//check the rules for the column
+			col = validateColumn(offset, offset+1, offset+2, rd);
+			if (row && col) redRow[offset] = rd;
 			break;
 		case Colour::YELLOW:
-			ok = yellowRow.validate(offset, rd);
-			if (ok) yellowRow[offset] = rd;
+			row = yellowRow.validate(offset, rd);
+			col = validateColumn(offset-1, offset, offset+1, rd);
+			if (row && col) yellowRow[offset] = rd;
 			break;
 		case Colour::BLUE:
-			ok = blueRow.validate(offset, rd);
-			if (ok) blueRow[offset] = rd;
+			row = blueRow.validate(offset, rd);
+			col = validateColumn(offset-2, offset-1, offset, rd);
+			if (row && col) blueRow[offset] = rd;
 			break;
 		//default return false means we were passed a bad colour
 		default:
@@ -59,7 +82,7 @@ bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 	}
 
 	//return true if we inserted, else false
-	if (ok) return true;
+	if (row && col) return true;
 	else return false;
 }
 

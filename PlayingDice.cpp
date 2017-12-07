@@ -13,7 +13,7 @@
 int getNumPlayers(){
     int numPlayers;
     while(true){
-        std::cout << "How many players will be playing?" << std::endl;
+        std::cout << "How many players will be playing?  ";
         std::cin >> numPlayers;
         if(numPlayers > 0  && numPlayers < 4){
             return numPlayers;
@@ -38,7 +38,7 @@ bool gameStatus(Player* players[], int size) {
 
 //helper function that tries to clear the screen a bit so we can see what is going on
 void clearConsole() {
-	for (int i = 0; i < 25; i++) {
+	for (int i = 0; i < 5; i++) {
 		std::cout << std::endl;
 	}
 }
@@ -99,7 +99,7 @@ int main() {
     //Enter names and create scoresheets for those players
     for(int i=0; i<numPlayers; ++i){
         std::string name;
-        std::cout << "Enter the name of Player " << i+1 << ":" << std::endl;
+        std::cout << "Enter the name of Player #" << i+1 << ": ";
         std::cin >> name;
         if(game=='0'){
             players[i] = new QwintoPlayer(name);
@@ -147,33 +147,25 @@ int main() {
     	std::cout << players[activePlayer]->getName() << "'s turn" << std::endl << std::endl;
 
     	//active player specific code
-        std::cout << *players[activePlayer] -> ss;
+    	std::cout << *players[activePlayer] -> ss;
     	players[activePlayer]->inputBeforeRoll(rod);
 
-    	//loop over all non active players
-    	for (int i =0; i < numPlayers; i++) {
-    		if (players[i]->isActive()) continue;
-
-    		//non active player code
-            players[i] -> inputBeforeRoll(rod);
-
-		}
-
+		//roll the dice
         rod.roll();
-        std::cout << rod;
-        //print active player scoresheet
+        
+        //reprint active player scoresheet & show dice
         std::cout << *players[activePlayer]->ss;
+        std::cout << rod;
 
         //get active player's after roll input
         players[activePlayer]->inputAfterRoll(rod);
 
-        for(int i=0; i < numPlayers; ++i){
-            if(!(players[i]->isActive())){
-                //Non active player
-                //Get after roll input
-                std::cout << *players[i]->ss;
-                players[i]->inputAfterRoll(rod);
-            }
+        for(int i=0; i < numPlayers; ++i) {
+        	if (players[i]->isActive()) continue;
+        	//inactive players get their turns
+			std::cout << *players[i]->ss; //show ss
+            std::cout << rod; //reshow rod
+			players[i]->inputAfterRoll(rod);
         }
 
 
