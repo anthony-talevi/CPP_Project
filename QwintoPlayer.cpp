@@ -1,24 +1,22 @@
 #include "QwintoPlayer.h"
-#include "Player.cpp"
-#include "RollOfDice.cpp"
-#include "ScoreSheet.cpp"
+#include "Player.h"
+#include "RollOfDice.h"
+#include "ScoreSheet.h"
+#include "QwintoScoreSheet.h"
 
 //Constructor
-QwintoPlayer::QwintoPlayer(std::string name): Player(name) {};
+QwintoPlayer::QwintoPlayer(std::string name): Player(name) {
+	ss = new QwintoScoreSheet(name);
+};
 
-void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
+void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 
 	/*
 	*	The following block of code asks the users where in the score sheet they
 	*	would like to add the rolled score.  Both active and inactive players
 	*   behave the same way / perform the same actions after a roll.
 	*/
-
-	// Both active and inactive players perform the same actions after the roll
-	if(isActive()){
-		deactivate();
-	}
-
+	
 	//Information needed to add score to scoresheet
 	Colour col;
 	int pos;
@@ -26,9 +24,7 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
 	//Colour input
 	while(true){
 		std::string row;
-		std::cout << "For which colour would you like to score these points? (r/y/b)"
-		 	<< std::endl;
-
+		std::cout << "For which colour would you like to score these points? (r/y/b) >";
 		std::cin >> row;
 
 		if(row=="r"){
@@ -53,16 +49,15 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
 
 	//Position input
 	while(true){
-		std::cout << "In which position would you like to record the score?" << std::endl;
+		std::cout << "In which position would you like to record the score? (1-10) >";
 		std::cin >> pos;
 
-
-		if(ss->score(rd, col, pos)){
-			std::cout << "Score added to your sheet";
+		if(ss->score(rd, col, pos-1)){
+			std::cout << "Score added to your sheet" << std::endl;
 			break;
 		}
 		else{
-			std::cout << "Score could not be added at this position.";
+			std::cout << "Score could not be added at this position." << std::endl;
 		}
 
 	}
@@ -75,7 +70,9 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
 }
 
 void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
+
 	if(isActive()){
+		//std::cout << *ss;
 		std::string yes_or_no;					//Used to store user input
 
 		/*
@@ -85,9 +82,8 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 		*/
 
 		//Red Die
-
 		while(true){
-			std::cout << "Would you like to roll the red die? (y/n)" << std::endl;
+			std::cout << "Would you like to roll the red die? (y/n)\t>";
 			std::cin >> yes_or_no;
 			if(yes_or_no=="n"||yes_or_no=="N"){
 				Dice d (Colour::RED);
@@ -104,7 +100,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 
 		//Yellow Die
 		while(true){
-			std::cout << "Would you like to roll the blue die? (y/n)" << std::endl;
+			std::cout << "Would you like to roll the yellow die? (y/n)\t>";
 			std::cin >> yes_or_no;
 			if(yes_or_no=="n"||yes_or_no=="N"){
 				Dice d (Colour::YELLOW);
@@ -122,7 +118,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 		//Blue Die
 
 		while(true){
-			std::cout << "Would you like to roll the blue die? (y/n)" << std::endl;
+			std::cout << "Would you like to roll the blue die? (y/n)\t>";
 			std::cin >> yes_or_no;
 			if(yes_or_no=="n"||yes_or_no=="N"){
 				Dice d (Colour::BLUE);
@@ -145,7 +141,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 	}
 
 	else{
-		std::cout << "Please wait for the other player to finish their turn" << std::endl;
+		std::cout << "Please wait for the other player to finish their turn" << std::endl << std::endl;
 	}
 
 

@@ -10,3 +10,6 @@ Final.mk
 cpp.workspace
 Debug/
 .codelite/
+*.gch
+*.out
+*.out

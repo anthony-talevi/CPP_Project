@@ -11,10 +11,11 @@
 class QwixxScoreSheet:public ScoreSheet {
 public:
 	QwixxScoreSheet(std::string name);
+	bool operator!() const;
 protected:
 	bool validate(RollOfDice rd, Colour c, int offset);
 	void calcTotal();
-	void printSheet(std::ostream& os);
+	std::ostream& printSheet(std::ostream& os) const;
 private:
 	QwixxRow<std::vector<int>, Colour::RED> redRow;
 	QwixxRow<std::vector<int>, Colour::YELLOW> yellowRow;

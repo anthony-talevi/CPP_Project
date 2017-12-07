@@ -4,7 +4,7 @@
 */
 
 #include "Dice.h"
-#include "RandomDice.cpp"
+#include "RandomDice.h"
 
 Dice::Dice(Colour col): c(col){};
 
@@ -35,9 +35,9 @@ std::string Dice::getColour()const{
             return "Blue";
 
         case Colour::WHITE1 :
-            return "White";
+            return "White 1";
         case Colour::WHITE2 :
-            return "White";
+            return "White 2";
     }
 }
 
@@ -47,6 +47,6 @@ int Dice::getCurrentFace() const{
 
 
 std::ostream& operator<<(std::ostream& output, const Dice& d){
-    output << "Colour: " << d.getColour() << " Face: " << d.current_face << std::endl;
+    output <<  d.getColour() << ": " << d.current_face << std::endl;
     return output;
 }

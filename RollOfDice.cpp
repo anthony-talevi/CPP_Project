@@ -6,7 +6,7 @@
 */
 
 #include "RollOfDice.h"
-#include "Dice.cpp"
+#include "Dice.h"
 
 //Constructor
 //Accepts a RandomDice Object that will be used for rolls.
@@ -82,8 +82,9 @@ RollOfDice RollOfDice::pair(Dice a, Dice b){
 
 //Overloaded << operator
 std::ostream& operator<<(std::ostream& output, const RollOfDice& rod){
+	output << "Result of Roll:" << std::endl;
     for(Dice d : rod){
-        output << d << std::endl;
+        output << d;
     }
     return output;
 }
