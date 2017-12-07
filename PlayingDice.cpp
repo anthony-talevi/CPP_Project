@@ -162,6 +162,7 @@ int main() {
         for(int i=0; i < numPlayers; ++i) {
         	if (players[i]->isActive()) continue;
         	//inactive players get their turns
+        	clearConsole(); //make a bit of space between players
 			std::cout << *players[i]->ss; //show ss
             std::cout << rod; //reshow rod
 			players[i]->inputAfterRoll(rod);
@@ -171,6 +172,7 @@ int main() {
     	//deactivate player
     	players[activePlayer]->deactivate();
     	turnCount++; //increment turn count
+    	clearConsole(); //make a bit of space between turns
 
     	if (turnCount > 5) break;
 	}
