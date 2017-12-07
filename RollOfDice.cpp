@@ -6,7 +6,7 @@
 */
 
 #include "RollOfDice.h"
-#include "Dice.cpp"
+#include "Dice.h"
 
 //Constructor
 //Accepts a RandomDice Object that will be used for rolls.

@@ -1,5 +1,3 @@
-#ifndef _PLAYER_CPP
-#define _PLAYER_CPP
 #include <string>
 
 #include "Player.h"
@@ -22,4 +20,3 @@ void Player::deactivate() {
 std::string Player::getName() {
 	return playerName;
 }
-#endif

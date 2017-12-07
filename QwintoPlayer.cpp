@@ -1,7 +1,8 @@
 #include "QwintoPlayer.h"
-#include "Player.cpp"
+#include "Player.h"
 #include "RollOfDice.h"
-#include "QwintoScoreSheet.cpp"
+#include "ScoreSheet.h"
+#include "QwintoScoreSheet.h"
 
 //Constructor
 QwintoPlayer::QwintoPlayer(std::string name): Player(name) {

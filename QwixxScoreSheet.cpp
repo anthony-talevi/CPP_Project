@@ -61,8 +61,25 @@ bool QwixxScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 	else return false;
 }
 
-//TODO: replace with overloaded << operator
-void QwixxScoreSheet::printSheet(std::ostream& os) {
+//overloaded not operator
+//return true when the scoresheet would cause the game to be over
+bool QwixxScoreSheet::operator!() const {
+	//4+ failed attempts for a player and the game is over
+	if (failedAttempts > 3) return true;
+	
+	//2+ locked rows and the game is over
+	int numLocked = 0;
+	if (redRow.lockStatus()) numLocked++;
+	if (yellowRow.lockStatus()) numLocked++;
+	if (greenRow.lockStatus()) numLocked++;
+	if (blueRow.lockStatus()) numLocked++;
+	
+	if (numLocked > 1) return true;
+	
+	return false;
+}
+
+std::ostream& QwixxScoreSheet::printSheet(std::ostream& os) const {
 	os << "Player name: " << playerName;
 	
 	for (auto i = 22; i > playerName.length(); i--)
@@ -86,4 +103,6 @@ void QwixxScoreSheet::printSheet(std::ostream& os) {
 		os << (i+1) << " ";
 	
 	os << std::endl;
+	
+	return os;
 }

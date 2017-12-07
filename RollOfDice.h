@@ -47,9 +47,6 @@ class RollOfDice {
 		vector<Dice>::const_iterator end() const;
 
 		friend std::ostream& operator<<(std::ostream&, const RollOfDice&);
-
-
-
 };
 
 #endif // _ROLL_OF_DICE_H

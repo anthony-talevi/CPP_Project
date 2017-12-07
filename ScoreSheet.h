@@ -2,6 +2,7 @@
 #define _SCORE_SHEET_H
 
 #include <string>
+#include <iostream>
 
 #include "RollOfDice.h"
 #include "Dice.h"
@@ -13,11 +14,12 @@ public:
 	bool score(RollOfDice rd, Colour c, int offset=-1);
 	bool fail();
 	int setTotal();
-	void print(std::ostream& os);
+	virtual bool operator!() const = 0;
+	friend std::ostream& operator<< (std::ostream& os, const ScoreSheet& ss);
 protected:
 	virtual bool validate(RollOfDice rd, Colour c, int offset) = 0;
 	virtual void calcTotal() = 0;
-	virtual void printSheet(std::ostream& os) = 0;
+	virtual std::ostream& printSheet(std::ostream& os) const = 0;
 	const std::string playerName;
 	int failedAttempts;
 	int gameScore;
