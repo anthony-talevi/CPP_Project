@@ -8,15 +8,15 @@ QwintoScoreSheet::QwintoScoreSheet(std::string name): ScoreSheet(name, 0, 0) {
 
 void QwintoScoreSheet::calcTotal() {
 	int score = 0;
-	
+
 	//take away for failed attempts
 	score -= (failedAttempts * 5);
-	
+
 	//calculate row totals
 	score += redRow.score();
 	score += yellowRow.score();
 	score += blueRow.score();
-	
+
 	//calculate bonus totals
 	if (redRow[0] > 0 && yellowRow[1] > 0 && blueRow[2] > 0) //b1 = r1,y2,b3
 	score += blueRow[2];
@@ -28,14 +28,14 @@ void QwintoScoreSheet::calcTotal() {
 	score += yellowRow[7];
 	if (redRow[6] > 0 && yellowRow[8] > 0 && blueRow[9] > 0) //b5 = r7,y9,b10
 	score += blueRow[9];
-	
+
 	//assign value of local variable to class variable
-	gameScore = score;	
+	gameScore = score;
 }
 
 bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 	bool ok;
-	
+
 	//switch the colour
 	switch (c) {
 		//same logic for each colour
@@ -57,7 +57,7 @@ bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 		default:
 			return false;
 	}
-	
+
 	//return true if we inserted, else false
 	if (ok) return true;
 	else return false;
@@ -66,27 +66,29 @@ bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 bool QwintoScoreSheet::operator!() const {
 	//4+ failed attempts for a player and the game is over
 	if (failedAttempts > 3) return true;
-	
+
 	//2+ full rows means the game is over
 	int sum = 0;
 	if (redRow.full()) sum++;
 	if (yellowRow.full()) sum++;
 	if (blueRow.full()) sum++;
-	
+
 	if (sum > 1) return true;
-	
+
 	return false;
 }
 
 std::ostream& QwintoScoreSheet::printSheet(std::ostream& os) const {
+	os << "-------------------------------------------------------------------";
+	os << std::endl;
 	os << "Player name: " << playerName;
-	
+
 	for (auto i = 22; i > playerName.length(); i--)
 		os << " ";
 	os << "Points: ";
 	if (gameScore < 10) os << " " << gameScore << std::endl;
 	else os << gameScore << std::endl;
-	
+
 	os << redRow;
 	os << yellowRow;
 	os << blueRow;
@@ -94,8 +96,9 @@ std::ostream& QwintoScoreSheet::printSheet(std::ostream& os) const {
 	os << "Failed throws: ";
 	for (auto i = 0; i < failedAttempts; i++)
 		os << (i+1) << " ";
-	
+
 	os << std::endl;
-	
+	os << "-------------------------------------------------------------------";
+	os << std::endl << std::endl;
 	return os;
 }

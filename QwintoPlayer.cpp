@@ -59,13 +59,12 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
 		std::cout << "In which position would you like to record the score?" << std::endl;
 		std::cin >> pos;
 
-
-		if(ss->score(rd, col, pos)){
-			std::cout << "Score added to your sheet";
+		if(ss->score(rd, col, pos-1)){
+			std::cout << "Score added to your sheet" << std::endl;
 			break;
 		}
 		else{
-			std::cout << "Score could not be added at this position.";
+			std::cout << "Score could not be added at this position." << std::endl;
 		}
 
 	}
@@ -78,6 +77,9 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
 }
 
 void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
+	//Print player name
+	std::cout << getName() << std::endl;
+
 	if(isActive()){
 		std::string yes_or_no;					//Used to store user input
 
@@ -88,7 +90,6 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 		*/
 
 		//Red Die
-
 		while(true){
 			std::cout << "Would you like to roll the red die? (y/n)" << std::endl;
 			std::cin >> yes_or_no;
@@ -107,7 +108,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 
 		//Yellow Die
 		while(true){
-			std::cout << "Would you like to roll the blue die? (y/n)" << std::endl;
+			std::cout << "Would you like to roll the yellow die? (y/n)" << std::endl;
 			std::cin >> yes_or_no;
 			if(yes_or_no=="n"||yes_or_no=="N"){
 				Dice d (Colour::YELLOW);
@@ -148,7 +149,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 	}
 
 	else{
-		std::cout << "Please wait for the other player to finish their turn" << std::endl;
+		std::cout << "Please wait for the other player to finish their turn" << std::endl << std::endl;
 	}
 
 

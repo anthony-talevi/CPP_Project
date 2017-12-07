@@ -1,29 +1,30 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "ScoreSheet.h"
 #include "QwixxScoreSheet.h"
 
 QwixxScoreSheet::QwixxScoreSheet(std::string name): ScoreSheet(name, 0, 0) {}
 
 void QwixxScoreSheet::calcTotal() {
 	int score = 0;
-	
+
 	//subtract points for failed attempts
 	score -= (failedAttempts * 5);
-	
+
 	//add the scores from the rows
 	score += redRow.score();
 	score += yellowRow.score();
 	score += greenRow.score();
 	score += blueRow.score();
-	
+
 	//assign the local variable to the class variable
 	gameScore = score;
 }
 
 bool QwixxScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 	bool ok;
-	
+
 	//switch the colour
 	switch (c) {
 		//same logic for each colour
@@ -66,28 +67,30 @@ bool QwixxScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 bool QwixxScoreSheet::operator!() const {
 	//4+ failed attempts for a player and the game is over
 	if (failedAttempts > 3) return true;
-	
+
 	//2+ locked rows and the game is over
 	int numLocked = 0;
 	if (redRow.lockStatus()) numLocked++;
 	if (yellowRow.lockStatus()) numLocked++;
 	if (greenRow.lockStatus()) numLocked++;
 	if (blueRow.lockStatus()) numLocked++;
-	
+
 	if (numLocked > 1) return true;
-	
+
 	return false;
 }
 
 std::ostream& QwixxScoreSheet::printSheet(std::ostream& os) const {
+	os << "-------------------------------------------------------------------";
+	os << std::endl;
 	os << "Player name: " << playerName;
-	
+
 	for (auto i = 22; i > playerName.length(); i--)
 		os << " ";
 	os << "Points: ";
 	if (gameScore < 10) os << " " << gameScore << std::endl;
 	else os << gameScore << std::endl;
-	
+
 	os << "         ------------------------------------" << std::endl;
 	os << redRow;
 	os << "         ------------------------------------" << std::endl;
@@ -97,12 +100,14 @@ std::ostream& QwixxScoreSheet::printSheet(std::ostream& os) const {
 	os << "         ------------------------------------" << std::endl;
 	os << blueRow;
 	os << "         ------------------------------------" << std::endl;
-	
+
 	os << "Failed throws: ";
 	for (auto i = 0; i < failedAttempts; i++)
 		os << (i+1) << " ";
-	
+
 	os << std::endl;
-	
+	os << "-------------------------------------------------------------------";
+	os << std::endl << std::endl;
+
 	return os;
 }

@@ -23,29 +23,20 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 			Dice w1 (Colour::WHITE1);
 			Dice w2 (Colour::WHITE2);
 
-			//Getting the numbers of the current white dice
-
-			RollOfDice whites = rd.pair(w1, w2);	//Getting the white dice from rd
-			w1 = whites.rmv(w1);			// Pulling the dice out
-			w2 = whites.rmv(w2);
-
-			int face1 = w1.getCurrentFace();	//Getting the faces of the dice
-			int face2 = w2.getCurrentFace();
 			int white;
 
 			// Which white die does the user want to use?
 			// Also adds score to scoresheet
 			while(true){
-				std::cout << "Which white dice would you like to use? (" << face1 << "/"
-				 	<< face2 << ")"<< std::endl;
+				std::cout << "Which white dice would you like to use? (1/2)"<< std::endl;
 				std::cin >> white;
 
-				if(white==face1){
+				if(white==1){
 					RollOfDice forscore = rd.pair(c, w1);
 					choosePosition(forscore, col);
 					break;
 				}
-				else if(white==face2){
+				else if(white==2){
 					RollOfDice forscore = rd.pair(c, w2);
 					choosePosition(forscore, col);
 					break;
@@ -86,6 +77,9 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 }
 
 void QwixxPlayer::inputBeforeRoll(RollOfDice& rd) {
+	//Print player name
+	std::cout << getName() << std::endl;
+
 	if(isActive()){
 		std::string yes_or_no;					//Used to store user input
 
@@ -187,12 +181,12 @@ int QwixxPlayer::choosePosition(RollOfDice rd, Colour col){
 		std::cout << "In which position would you like to record the score?" << std::endl;
 		std::cin >> pos;
 
-		if(ss->score(rd, col, pos)){
-			std::cout << "Score added to your sheet";
+		if(ss->score(rd, col, pos+1)){
+			std::cout << "Score added to your sheet" << std::endl;
 			break;
 		}
 		else{
-			std::cout << "Score could not be added at this position.";
+			std::cout << "Score could not be added at this position." << std::endl;
 		}
 	}
 

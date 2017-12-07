@@ -47,6 +47,6 @@ int Dice::getCurrentFace() const{
 
 
 std::ostream& operator<<(std::ostream& output, const Dice& d){
-    output << "Colour: " << d.getColour() << " Face: " << d.current_face << std::endl;
+    output <<  d.getColour() << ": " << d.current_face << std::endl;
     return output;
 }

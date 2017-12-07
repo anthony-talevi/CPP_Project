@@ -7,6 +7,8 @@
 #include "Player.h"
 #include "QwixxPlayer.h"
 #include "QwintoPlayer.h"
+#include "RandomDice.h"
+#include "RollOfDice.h"
 
 int getNumPlayers(){
     int numPlayers;
@@ -30,7 +32,7 @@ bool gameStatus(Player* players[], int size) {
 		if (!players[i]->ss) //use the ! opeator of the ss
 			return true;
 	}
-	
+
 	return false;
 }
 
@@ -46,6 +48,18 @@ int main() {
     std::cout << "Enter '0' for Qwinto, enter '1' for Qwixx" << std::endl;
     char game;
     int numPlayers;
+
+    //Initializing RollOfDice
+    RandomDice rd;
+    RollOfDice rod = RollOfDice(rd);
+    Dice r (Dice(Colour::RED));
+    Dice y (Dice(Colour::YELLOW));
+    Dice b (Dice(Colour::BLUE));
+
+    rod.add(r);
+    rod.add(y);
+    rod.add(b);
+
     //active player holds the index of the active player
     int activePlayer = 0;
     //turn count is the turn, is also used to determine the active player with
@@ -65,6 +79,12 @@ int main() {
         else if(game=='1'){
             std::cout << "Qwixx Selected" << std::endl;
             numPlayers = getNumPlayers();
+            Dice w1 (Dice(Colour::WHITE1));
+            Dice w2 (Dice(Colour::WHITE2));
+            Dice g (Dice(Colour::GREEN));
+            rod.add(w1);
+            rod.add(w2);
+            rod.add(g);
             break;
         }
         else{
@@ -93,11 +113,11 @@ int main() {
 
 	clearConsole();
     std::cout << "Great! Let's get started!" << std::endl;
-    
+
     //TODO: create roll of dice
- 
+
     /* main loop pseudocode -- x indicates complete
-    
+
     x	while end condition is not reached
 	x		next player takes a turn i.e., becomes active
 			get input from active player before roll
@@ -112,57 +132,72 @@ int main() {
 	x	loop over all players
 	x		calculate points for player
 	x		print scoresheet
-	x	print overall winner 
+	x	print overall winner
     */
-    
+
     //main loop
     while (!gameStatus(players, numPlayers)) {
     	//determine the next active player
     	activePlayer = turnCount % numPlayers;
     	//set player to active
     	players[activePlayer]->activate();
-    	
+
     	//show turn data to players
     	std::cout << "Beginning turn #" << (turnCount+1) << std::endl;
     	std::cout << players[activePlayer]->getName() << "'s turn" << std::endl << std::endl;
-    	
+
     	//active player specific code
-    	//players[activePlayer]->inputBeforeRoll(rd);
-    	
-    	//print active player scoresheet
-    	std::cout << *players[activePlayer]->ss;
-    	
+        std::cout << *players[activePlayer] -> ss;
+    	players[activePlayer]->inputBeforeRoll(rod);
+
     	//loop over all non active players
     	for (int i =0; i < numPlayers; i++) {
     		if (players[i]->isActive()) continue;
-    		
+
     		//non active player code
-    		//print non-active player scoresheet
-    		std::cout << *players[i]->ss;
-    		
+            players[i] -> inputBeforeRoll(rod);
+
 		}
-    	
+
+        rod.roll();
+        std::cout << rod;
+        //print active player scoresheet
+        std::cout << *players[activePlayer]->ss;
+
+        //get active player's after roll input
+        players[activePlayer]->inputAfterRoll(rod);
+
+        for(int i=0; i < numPlayers; ++i){
+            if(!(players[i]->isActive())){
+                //Non active player
+                //Get after roll input
+                std::cout << *players[i]->ss;
+                players[i]->inputAfterRoll(rod);
+            }
+        }
+
+
     	//deactivate player
     	players[activePlayer]->deactivate();
     	turnCount++; //increment turn count
-    	
+
     	if (turnCount > 5) break;
 	}
-	
+
 	//print out scoresheets
 	for (int i = 0; i < numPlayers; i++) {
 		//calculate final scores
 		scores[i] = players[i]->ss->setTotal();
-		
+
 		//output scoresheets
 		std::cout << *players[i]->ss;
 	}
-	
+
 	//output winner
 	int largest = 0;
 	for (int i = 0; i < numPlayers; i++) {
 		if (scores[i] > scores[largest]) largest = i;
 	}
-	
+
 	std::cout << std::endl << std::endl << players[largest]->getName() << " is the winner!" << std::endl;
 }
