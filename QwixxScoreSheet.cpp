@@ -34,24 +34,41 @@ bool QwixxScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 				redRow += rd;
 				//set ok to true
 				ok = true;
+				//if the row was locked we remove the dice from the roll
+				if (redRow.lockStatus()) {
+					Dice d (Colour::RED);
+					rd.rmv(d);
+				}
 			} catch (std::exception& e) { ok = false; } //if we can't insert an error is thrown
 			break;
 		case Colour::YELLOW:
 			try {
 				yellowRow += rd;
 				ok = true;
+				if (yellowRow.lockStatus()) {
+					Dice d (Colour::YELLOW);
+					rd.rmv(d);
+				}
 			} catch (std::exception& e) { ok = false; }
 			break;
 		case Colour::GREEN:
 			try {
 				greenRow += rd;
 				ok = true;
+				if (greenRow.lockStatus()) {
+					Dice d (Colour::GREEN);
+					rd.rmv(d);
+				}
 			} catch (std::exception& e) { ok = false; }
 			break;
 		case Colour::BLUE:
 			try {
 				blueRow += rd;
 				ok = true;
+				if (blueRow.lockStatus()) {
+					Dice d (Colour::BLUE);
+					rd.rmv(d);
+				}
 			} catch (std::exception& e) { ok = false; }
 			break;
 		//default return false means we were passed a bad colour

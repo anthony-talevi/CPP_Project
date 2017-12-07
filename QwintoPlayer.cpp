@@ -19,9 +19,9 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 
 	std::cout << *ss;
 	// Both active and inactive players perform the same actions after the roll
-	if(isActive()){
-		deactivate();
-	}
+//	if(isActive()){
+//		deactivate();
+//	}
 
 	//Information needed to add score to scoresheet
 	Colour col;
