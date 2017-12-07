@@ -93,12 +93,11 @@ bool QwixxScoreSheet::operator!() const {
 	if (blueRow.lockStatus()) numLocked++;
 
 	if (numLocked > 1) return true;
-
 	return false;
 }
 
 std::ostream& QwixxScoreSheet::printSheet(std::ostream& os) const {
-	os << "-------------------------------------------------------------------";
+	os << "---------------------------------------------";
 	os << std::endl;
 	os << "Player name: " << playerName;
 
@@ -123,7 +122,7 @@ std::ostream& QwixxScoreSheet::printSheet(std::ostream& os) const {
 		os << (i+1) << " ";
 
 	os << std::endl;
-	os << "-------------------------------------------------------------------";
+	os << "---------------------------------------------";
 	os << std::endl << std::endl;
 
 	return os;

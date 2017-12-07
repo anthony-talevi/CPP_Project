@@ -20,11 +20,13 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 	//Information needed to add score to scoresheet
 	Colour col;
 	int pos;
+	
+	bool failThrow = false;
 
 	//Colour input
-	while(true){
+	while(true && !failThrow){
 		std::string row;
-		std::cout << "For which colour would you like to score these points? (r/y/b) >";
+		std::cout << "For which colour would you like to score these points? (r/y/b/f) >";
 		std::cin >> row;
 
 		if(row=="r"){
@@ -41,6 +43,21 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 			col = Colour::BLUE;
 			break;
 		}
+		//handle failing throws
+		else if (row == "f") {
+			if (!isActive()) { //inactive player can safely skip their turn
+				std::cout << "You have chosen to skip your turn, confirm? (y/n) >";
+				std::cin >> row;
+				if (row == "y")	failThrow = true;
+			}
+			else { //active player must record a failed throw
+				std::cout << "You are the active player, failing your throw will result in a -5 pt penalty." << std::endl;
+				std::cout << "Please confirm you want to do this: (y/n) >";
+				std::cin>> row;
+				
+				if (row == "y") failThrow = true;
+			}
+		}
 
 		else{
 			std::cout << "Invalid input." << std::endl;
@@ -48,7 +65,7 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 	}
 
 	//Position input
-	while(true){
+	while(true &&! failThrow){
 		std::cout << "In which position would you like to record the score? (1-10) >";
 		std::cin >> pos;
 
@@ -60,6 +77,12 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 			std::cout << "Score could not be added at this position." << std::endl;
 		}
 
+	}
+	
+	//record the failed throw for the active player
+	if (failThrow && isActive()) {
+		ss->fail();
+		std::cout << "Failed throw recorded" << std::endl;
 	}
 
 	//Put removed dice back in the RollOfDice

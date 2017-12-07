@@ -102,12 +102,11 @@ bool QwintoScoreSheet::operator!() const {
 	if (blueRow.full()) sum++;
 
 	if (sum > 1) return true;
-
 	return false;
 }
 
 std::ostream& QwintoScoreSheet::printSheet(std::ostream& os) const {
-	os << "-------------------------------------------------------------------";
+	os << "---------------------------------------------";
 	os << std::endl;
 	os << "Player name: " << playerName;
 
@@ -126,7 +125,7 @@ std::ostream& QwintoScoreSheet::printSheet(std::ostream& os) const {
 		os << (i+1) << " ";
 
 	os << std::endl;
-	os << "-------------------------------------------------------------------";
+	os << "---------------------------------------------";
 	os << std::endl << std::endl;
 	return os;
 }
