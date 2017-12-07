@@ -13,7 +13,7 @@
 int getNumPlayers(){
     int numPlayers;
     while(true){
-        std::cout << "How many players will be playing?  ";
+        std::cout << "How many players will be playing? (1-3) >";
         std::cin >> numPlayers;
         if(numPlayers > 0  && numPlayers < 4){
             return numPlayers;
@@ -27,10 +27,13 @@ int getNumPlayers(){
 //determines whether the game is over
 //returns true when game is over
 bool gameStatus(Player* players[], int size) {
+	bool over;
+	std::cout << "Checking game over" <<std::endl;
 	//loop over all players
 	for (int i = 0; i < size; i++) {
-		if (!players[i]->ss) //use the ! opeator of the ss
-			return true;
+		std::cout << "Checking player " <<players[i]->getName() << std::endl;
+		over = !players[i] ->ss;
+		if (over) return true;
 	}
 
 	return false;
@@ -48,6 +51,7 @@ int main() {
     std::cout << "Enter '0' for Qwinto, enter '1' for Qwixx" << std::endl;
     char game;
     int numPlayers;
+    bool gameOver = false;
 
     //Initializing RollOfDice
     RandomDice rd;
@@ -114,8 +118,6 @@ int main() {
 	clearConsole();
     std::cout << "Great! Let's get started!" << std::endl;
 
-    //TODO: create roll of dice
-
     /* main loop pseudocode -- x indicates complete
 
     x	while end condition is not reached
@@ -136,7 +138,7 @@ int main() {
     */
 
     //main loop
-    while (!gameStatus(players, numPlayers)) {
+    while (!gameOver) {
     	//determine the next active player
     	activePlayer = turnCount % numPlayers;
     	//set player to active
@@ -168,13 +170,15 @@ int main() {
 			players[i]->inputAfterRoll(rod);
         }
 
+		//check gameOver
+		gameOver = gameStatus(players, numPlayers);
 
     	//deactivate player
     	players[activePlayer]->deactivate();
     	turnCount++; //increment turn count
     	clearConsole(); //make a bit of space between turns
 
-    	if (turnCount > 5) break;
+    	if (turnCount > 4) break;
 	}
 
 	//print out scoresheets

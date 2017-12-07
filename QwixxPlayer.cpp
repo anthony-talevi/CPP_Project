@@ -15,7 +15,8 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 	//How many scores to record for this turn
 	int num_scores;
 	while(true){
-		std::cout << "How many scores would you like to record?" << std::endl;
+		if (isActive()) std::cout << "How many scores would you like to record? (0-2) >";
+		else std::cout << "How many scores would you like to record? (0-1) >";
 		std::cin >> num_scores;
 
 		//Is active player.  Would like to record 2 scores
@@ -35,7 +36,7 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 			//This state,
 			RollOfDice forscore = RollOfDice(rd);
 			while(true){
-				std::cout << "Which white dice would you like to use? (1/2)"<< std::endl;
+				std::cout << "Which white dice would you like to use? (1/2) >";
 				std::cin >> white;
 				if(white==1){
 					forscore = rd.pair(c, w1);
@@ -74,7 +75,16 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 		}
 
 		else if(isActive() && num_scores==0){
+			std::string failInput;
 			std::cout << "As the active player, you must record at least 1 score." << std::endl;
+			std::cout << "Or you can choose to fail the throw. This counts as a -5pt penalty." << std::endl;
+			std::cout << "Would you like to fail the throw? (y/n) >";
+			std::cin >> failInput;
+			
+			if (failInput == "y" || failInput == "Y") {
+				ss->fail();
+				break;
+			}
 		}
 
 		//Would like to record 1 score.  All players can do this, and this looks
@@ -93,7 +103,7 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 				break;
 			}
 			else{
-				std::cout << "Invlaid entry.  Score could not be added in this row, at this position.";
+				std::cout << "Invalid entry.  Score could not be added in this row, at this position.";
 				std::cout << "  Select a different row, or different number of scores.";
 				std::cout << std::endl;
 			}
