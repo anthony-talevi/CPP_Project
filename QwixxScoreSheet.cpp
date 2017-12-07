@@ -82,7 +82,6 @@ bool QwixxScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 //overloaded not operator
 //return true when the scoresheet would cause the game to be over
 bool QwixxScoreSheet::operator!() const {
-	std::cout << "test" << std::endl;
 	//4+ failed attempts for a player and the game is over
 	if (failedAttempts > 3) return true;
 
@@ -94,7 +93,6 @@ bool QwixxScoreSheet::operator!() const {
 	if (blueRow.lockStatus()) numLocked++;
 
 	if (numLocked > 1) return true;
-	std::cout << "fa: " << failedAttempts << "l: " << numLocked << std::endl;
 	return false;
 }
 

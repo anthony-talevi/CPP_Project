@@ -28,11 +28,9 @@ int getNumPlayers(){
 //returns true when game is over
 bool gameStatus(Player* players[], int size) {
 	bool over;
-	std::cout << "Checking game over" <<std::endl;
 	//loop over all players
 	for (int i = 0; i < size; i++) {
-		std::cout << "Checking player " <<players[i]->getName() << std::endl;
-		over = !players[i] ->ss;
+		over = !*players[i]->ss;
 		if (over) return true;
 	}
 
@@ -117,25 +115,6 @@ int main() {
 
 	clearConsole();
     std::cout << "Great! Let's get started!" << std::endl;
-
-    /* main loop pseudocode -- x indicates complete
-
-    x	while end condition is not reached
-	x		next player takes a turn i.e., becomes active
-			get input from active player before roll
-			roll dice and show result
-	x		print scoresheet of active player
-			get input from active player after roll
-			score dice according to input from active player
-	x		loop over all non-active players
-	x			print scoresheet of non-active player
-				get input from non-active player
-				score dice according to input
-	x	loop over all players
-	x		calculate points for player
-	x		print scoresheet
-	x	print overall winner
-    */
 
     //main loop
     while (!gameOver) {

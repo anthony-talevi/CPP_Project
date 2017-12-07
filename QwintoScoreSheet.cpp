@@ -102,7 +102,6 @@ bool QwintoScoreSheet::operator!() const {
 	if (blueRow.full()) sum++;
 
 	if (sum > 1) return true;
-	std::cout << "fa: " << failedAttempts << "f: " << sum << std::endl;
 	return false;
 }
 
