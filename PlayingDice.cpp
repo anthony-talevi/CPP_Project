@@ -153,8 +153,7 @@ int main() {
 		//roll the dice
         rod.roll();
         
-        //reprint active player scoresheet & show dice
-        std::cout << *players[activePlayer]->ss;
+        //show roll
         std::cout << rod;
 
         //get active player's after roll input

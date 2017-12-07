@@ -10,7 +10,6 @@ QwixxPlayer::QwixxPlayer(std::string name): Player(name) {
 
 void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 
-	std::cout << *ss;
 	//Check for failed throw
 
 	//How many scores to record for this turn

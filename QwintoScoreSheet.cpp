@@ -54,6 +54,8 @@ bool QwintoScoreSheet::validateColumn(int r, int y, int b, int roll) {
 //must meet the validation rules of a row (ascending order) and column (unique values)
 //returns true if the "rd" was placed, false if it was not
 bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
+	if (offset < 0 || offset > 9) return false;
+	
 	bool row, col;
 
 	//switch the colour
@@ -62,8 +64,11 @@ bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 		case Colour::RED:
 			//check the rules for the row
 			row = redRow.validate(offset, rd);
+			
 			//check the rules for the column
 			col = validateColumn(offset, offset+1, offset+2, rd);
+			
+			//if validation passed insert the roll
 			if (row && col) redRow[offset] = rd;
 			break;
 		case Colour::YELLOW:

@@ -82,6 +82,7 @@ RollOfDice RollOfDice::pair(Dice a, Dice b){
 
 //Overloaded << operator
 std::ostream& operator<<(std::ostream& output, const RollOfDice& rod){
+	output << "Result of Roll:" << std::endl;
     for(Dice d : rod){
         output << d;
     }

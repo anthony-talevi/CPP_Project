@@ -16,13 +16,7 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 	*	would like to add the rolled score.  Both active and inactive players
 	*   behave the same way / perform the same actions after a roll.
 	*/
-
-	std::cout << *ss;
-	// Both active and inactive players perform the same actions after the roll
-//	if(isActive()){
-//		deactivate();
-//	}
-
+	
 	//Information needed to add score to scoresheet
 	Colour col;
 	int pos;
@@ -30,9 +24,7 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 	//Colour input
 	while(true){
 		std::string row;
-		std::cout << "For which colour would you like to score these points? (r/y/b)"
-		 	<< std::endl;
-
+		std::cout << "For which colour would you like to score these points? (r/y/b) >";
 		std::cin >> row;
 
 		if(row=="r"){
@@ -57,7 +49,7 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 
 	//Position input
 	while(true){
-		std::cout << "In which position would you like to record the score?" << std::endl;
+		std::cout << "In which position would you like to record the score? (1-10) >";
 		std::cin >> pos;
 
 		if(ss->score(rd, col, pos-1)){
@@ -80,7 +72,7 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 
 	if(isActive()){
-		std::cout << *ss;
+		//std::cout << *ss;
 		std::string yes_or_no;					//Used to store user input
 
 		/*
@@ -91,7 +83,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 
 		//Red Die
 		while(true){
-			std::cout << "Would you like to roll the red die? (y/n)" << std::endl;
+			std::cout << "Would you like to roll the red die? (y/n)\t>";
 			std::cin >> yes_or_no;
 			if(yes_or_no=="n"||yes_or_no=="N"){
 				Dice d (Colour::RED);
@@ -108,7 +100,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 
 		//Yellow Die
 		while(true){
-			std::cout << "Would you like to roll the yellow die? (y/n)" << std::endl;
+			std::cout << "Would you like to roll the yellow die? (y/n)\t>";
 			std::cin >> yes_or_no;
 			if(yes_or_no=="n"||yes_or_no=="N"){
 				Dice d (Colour::YELLOW);
@@ -126,7 +118,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 		//Blue Die
 
 		while(true){
-			std::cout << "Would you like to roll the blue die? (y/n)" << std::endl;
+			std::cout << "Would you like to roll the blue die? (y/n)\t>";
 			std::cin >> yes_or_no;
 			if(yes_or_no=="n"||yes_or_no=="N"){
 				Dice d (Colour::BLUE);
