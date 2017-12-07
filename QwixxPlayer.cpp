@@ -10,6 +10,9 @@ QwixxPlayer::QwixxPlayer(std::string name): Player(name) {
 
 void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 
+	std::cout << *ss;
+	//Check for failed throw
+
 	//How many scores to record for this turn
 	int num_scores;
 	while(true){
@@ -22,35 +25,57 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 			Dice c (col);
 			Dice w1 (Colour::WHITE1);
 			Dice w2 (Colour::WHITE2);
+			bool success;
 
 			int white;
 
 			// Which white die does the user want to use?
 			// Also adds score to scoresheet
+
+			//Initialized only because no default constructor.  Never used in
+			//This state,
+			RollOfDice forscore = RollOfDice(rd);
 			while(true){
 				std::cout << "Which white dice would you like to use? (1/2)"<< std::endl;
 				std::cin >> white;
-
 				if(white==1){
-					RollOfDice forscore = rd.pair(c, w1);
-					choosePosition(forscore, col);
+					forscore = rd.pair(c, w1);
 					break;
 				}
 				else if(white==2){
-					RollOfDice forscore = rd.pair(c, w2);
-					choosePosition(forscore, col);
+					forscore = rd.pair(c, w2);
 					break;
 				}
 				else{
-					std::cout << "Invalid Input" << std::endl;
+					std::cout << "Invalid input.  Try again.";
 				}
 			}
-			break;
+			//Check if that white die can be used.
+			int pos = forscore;
+			success = ss->score(forscore, col, pos);
+			if(success){
+				std::cout << "Score successfully added to scoresheet";
+				std::cout << std::endl;
+				break;
+			}
+			else{
+				std::cout << "Invlaid entry.  Score could not be added in this row, at this position.";
+				std::cout << "  Select a different row, different white die, or different number of scores.";
+				std::cout << std::endl;
+			}
+		}
+
+		else if(!isActive() && num_scores==2){
+			std::cout << "You are not the active player. You can record at most 1 score." << std::endl;
 		}
 
 		//Is not active player and would like to record 0 scores.
 		else if(!isActive() && num_scores==0){
 			break;
+		}
+
+		else if(isActive() && num_scores==0){
+			std::cout << "As the active player, you must record at least 1 score." << std::endl;
 		}
 
 		//Would like to record 1 score.  All players can do this, and this looks
@@ -60,13 +85,19 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 			Dice w1 (Colour::WHITE1);
 			Dice w2 (Colour::WHITE2);
 			RollOfDice whites = rd.pair(w1, w2);
-			int pos;
+			int pos = whites;
 
 			Colour col = chooseColour();
-
-			//Get position from user and add score to scoresheet.
-			choosePosition(whites, col);
-			break;
+			bool success = ss -> score(whites, col, pos);
+			if(success){
+				std::cout << "Score successfully added to scoresheet" << std::endl;
+				break;
+			}
+			else{
+				std::cout << "Invlaid entry.  Score could not be added in this row, at this position.";
+				std::cout << "  Select a different row, or different number of scores.";
+				std::cout << std::endl;
+			}
 		}
 
 		//Invalid input
@@ -78,119 +109,102 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 
 void QwixxPlayer::inputBeforeRoll(RollOfDice& rd) {
 	//Print player name
-	std::cout << getName() << std::endl;
-
-	if(isActive()){
-		std::string yes_or_no;					//Used to store user input
-
-		/*
-		*	The following block of code asks the users which dice they Would
-		*   Like to use for their turn.  It is a series of yes or no questions,
-		*   Looped until a valid input is entered.
-		*   Essentially the same as QwintoPlayer only extended
-		*/
-
-		//Red Die
-
-		while(true){
-			std::cout << "Would you like to roll the red die? (y/n)" << std::endl;
-			std::cin >> yes_or_no;
-			if(yes_or_no=="n"||yes_or_no=="N"){
-				Dice d (Colour::RED);
-				removed_for_roll.push_back(rd.rmv(d));	//Add a Red die to temp vector
-				break;									//Remove from the rollable dice
-			}
-			else if(yes_or_no=="y"||yes_or_no=="Y"){
-				break;		//Leave die in vector
-			}
-			else{
-				std::cout << "Invalid input" << std::endl;
-			}
-		}
-
-		//Yellow Die
-		while(true){
-			std::cout << "Would you like to roll the yellow die? (y/n)" << std::endl;
-			std::cin >> yes_or_no;
-			if(yes_or_no=="n"||yes_or_no=="N"){
-				Dice d (Colour::YELLOW);
-				removed_for_roll.push_back(rd.rmv(d));	//Add a Blue die to temp vector
-				break;							//Remove from the rollable dice
-			}
-			else if(yes_or_no=="y"||yes_or_no=="Y"){
-				break;		//Leave die in vector
-			}
-			else{
-				std::cout << "Invalid input" << std::endl;
-			}
-		}
-
-		//Blue Die
-
-		while(true){
-			std::cout << "Would you like to roll the blue die? (y/n)" << std::endl;
-			std::cin >> yes_or_no;
-			if(yes_or_no=="n"||yes_or_no=="N"){
-				Dice d (Colour::BLUE);
-				removed_for_roll.push_back(rd.rmv(d));	//Add a Blue die to temp vector
-				break;									//Remove from the rollable dice
-			}
-			else if(yes_or_no=="y"||yes_or_no=="Y"){
-				break;		//Leave die in vector
-			}
-			else{
-				std::cout << "Invalid input" << std::endl;
-			}
-		}
-
-		//Green Die
-
-		while(true){
-			std::cout << "Would you like to roll the green die? (y/n)" << std::endl;
-			std::cin >> yes_or_no;
-			if(yes_or_no=="n"||yes_or_no=="N"){
-				Dice d (Colour::GREEN);
-				removed_for_roll.push_back(rd.rmv(d));	//Add a Blue die to temp vector
-				break;									//Remove from the rollable dice
-			}
-			else if(yes_or_no=="y"||yes_or_no=="Y"){
-				break;		//Leave die in vector
-			}
-			else{
-				std::cout << "Invalid input" << std::endl;
-			}
-		}
-
-		//Have no dice been chosen?  If so, recall inputBeforeRoll()
-		if(removed_for_roll.size()==3){
-			std::cout << "Cannot roll 0 dice.  Try again." << std::endl;
-			inputBeforeRoll(rd);
-		}
-	}
-
-	else{
-		std::cout << "Please wait for the other player to finish their turn" << std::endl;
-	}
-
-}
-
-int QwixxPlayer::choosePosition(RollOfDice rd, Colour col){
-	// User selects position and score is added to the scoresheet
-	while(true){
-		int pos;
-		std::cout << "In which position would you like to record the score?" << std::endl;
-		std::cin >> pos;
-
-		if(ss->score(rd, col, pos+1)){
-			std::cout << "Score added to your sheet" << std::endl;
-			break;
-		}
-		else{
-			std::cout << "Score could not be added at this position." << std::endl;
-		}
-	}
+	// std::cout << getName() << std::endl;
+	//
+	// if(isActive()){
+	// 	std::string yes_or_no;					//Used to store user input
+	//
+	// 	/*
+	// 	*	The following block of code asks the users which dice they Would
+	// 	*   Like to use for their turn.  It is a series of yes or no questions,
+	// 	*   Looped until a valid input is entered.
+	// 	*   Essentially the same as QwintoPlayer only extended
+	// 	*/
+	//
+	// 	//Red Die
+	//
+	// 	while(true){
+	// 		std::cout << "Would you like to roll the red die? (y/n)" << std::endl;
+	// 		std::cin >> yes_or_no;
+	// 		if(yes_or_no=="n"||yes_or_no=="N"){
+	// 			Dice d (Colour::RED);
+	// 			removed_for_roll.push_back(rd.rmv(d));	//Add a Red die to temp vector
+	// 			break;									//Remove from the rollable dice
+	// 		}
+	// 		else if(yes_or_no=="y"||yes_or_no=="Y"){
+	// 			break;		//Leave die in vector
+	// 		}
+	// 		else{
+	// 			std::cout << "Invalid input" << std::endl;
+	// 		}
+	// 	}
+	//
+	// 	//Yellow Die
+	// 	while(true){
+	// 		std::cout << "Would you like to roll the yellow die? (y/n)" << std::endl;
+	// 		std::cin >> yes_or_no;
+	// 		if(yes_or_no=="n"||yes_or_no=="N"){
+	// 			Dice d (Colour::YELLOW);
+	// 			removed_for_roll.push_back(rd.rmv(d));	//Add a Blue die to temp vector
+	// 			break;							//Remove from the rollable dice
+	// 		}
+	// 		else if(yes_or_no=="y"||yes_or_no=="Y"){
+	// 			break;		//Leave die in vector
+	// 		}
+	// 		else{
+	// 			std::cout << "Invalid input" << std::endl;
+	// 		}
+	// 	}
+	//
+	// 	//Blue Die
+	//
+	// 	while(true){
+	// 		std::cout << "Would you like to roll the blue die? (y/n)" << std::endl;
+	// 		std::cin >> yes_or_no;
+	// 		if(yes_or_no=="n"||yes_or_no=="N"){
+	// 			Dice d (Colour::BLUE);
+	// 			removed_for_roll.push_back(rd.rmv(d));	//Add a Blue die to temp vector
+	// 			break;									//Remove from the rollable dice
+	// 		}
+	// 		else if(yes_or_no=="y"||yes_or_no=="Y"){
+	// 			break;		//Leave die in vector
+	// 		}
+	// 		else{
+	// 			std::cout << "Invalid input" << std::endl;
+	// 		}
+	// 	}
+	//
+	// 	//Green Die
+	//
+	// 	while(true){
+	// 		std::cout << "Would you like to roll the green die? (y/n)" << std::endl;
+	// 		std::cin >> yes_or_no;
+	// 		if(yes_or_no=="n"||yes_or_no=="N"){
+	// 			Dice d (Colour::GREEN);
+	// 			removed_for_roll.push_back(rd.rmv(d));	//Add a Blue die to temp vector
+	// 			break;									//Remove from the rollable dice
+	// 		}
+	// 		else if(yes_or_no=="y"||yes_or_no=="Y"){
+	// 			break;		//Leave die in vector
+	// 		}
+	// 		else{
+	// 			std::cout << "Invalid input" << std::endl;
+	// 		}
+	// 	}
+	//
+	// 	//Have no dice been chosen?  If so, recall inputBeforeRoll()
+	// 	if(removed_for_roll.size()==3){
+	// 		std::cout << "Cannot roll 0 dice.  Try again." << std::endl;
+	// 		inputBeforeRoll(rd);
+	// 	}
+	// }
+	//
+	// else{
+	// 	std::cout << "Please wait for the other player to finish their turn" << std::endl;
+	// }
 
 }
+
 
 
 Colour QwixxPlayer::chooseColour(){

@@ -9,7 +9,7 @@ QwintoPlayer::QwintoPlayer(std::string name): Player(name) {
 	ss = new QwintoScoreSheet(name);
 };
 
-void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
+void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 
 	/*
 	*	The following block of code asks the users where in the score sheet they
@@ -17,6 +17,7 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
 	*   behave the same way / perform the same actions after a roll.
 	*/
 
+	std::cout << *ss;
 	// Both active and inactive players perform the same actions after the roll
 	if(isActive()){
 		deactivate();
@@ -77,10 +78,9 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd) {
 }
 
 void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
-	//Print player name
-	std::cout << getName() << std::endl;
 
 	if(isActive()){
+		std::cout << *ss;
 		std::string yes_or_no;					//Used to store user input
 
 		/*

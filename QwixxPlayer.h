@@ -10,7 +10,6 @@ public:
 	void inputBeforeRoll(RollOfDice& rd);
 private:
 	Colour chooseColour();
-	int choosePosition(RollOfDice, Colour);
 };
 
 #endif // _QWIXX_PLAYER_H

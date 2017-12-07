@@ -146,8 +146,7 @@ int main() {
     	std::cout << "Beginning turn #" << (turnCount+1) << std::endl;
     	std::cout << players[activePlayer]->getName() << "'s turn" << std::endl << std::endl;
 
-    	//active player specific code
-        std::cout << *players[activePlayer] -> ss;
+
     	players[activePlayer]->inputBeforeRoll(rod);
 
     	//loop over all non active players
@@ -158,11 +157,11 @@ int main() {
             players[i] -> inputBeforeRoll(rod);
 
 		}
-
+        std::cout << "Rolling Dice..." << std::endl << std::endl;
+        std::cout << "-------------------------------------------------------------------";
+        std::cout << std::endl;
         rod.roll();
         std::cout << rod;
-        //print active player scoresheet
-        std::cout << *players[activePlayer]->ss;
 
         //get active player's after roll input
         players[activePlayer]->inputAfterRoll(rod);
@@ -171,7 +170,6 @@ int main() {
             if(!(players[i]->isActive())){
                 //Non active player
                 //Get after roll input
-                std::cout << *players[i]->ss;
                 players[i]->inputAfterRoll(rod);
             }
         }

@@ -35,9 +35,9 @@ std::string Dice::getColour()const{
             return "Blue";
 
         case Colour::WHITE1 :
-            return "White";
+            return "White 1";
         case Colour::WHITE2 :
-            return "White";
+            return "White 2";
     }
 }
 
