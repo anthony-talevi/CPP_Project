@@ -106,7 +106,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 
 		//Red Die
 		while(true){
-			std::cout << "Would you like to roll the red die? (y/n)\t>";
+			std::cout << "Would you like to roll the red die?    (y/n) >";
 			std::cin >> yes_or_no;
 			if(yes_or_no=="n"||yes_or_no=="N"){
 				Dice d (Colour::RED);
@@ -123,7 +123,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 
 		//Yellow Die
 		while(true){
-			std::cout << "Would you like to roll the yellow die? (y/n)\t>";
+			std::cout << "Would you like to roll the yellow die? (y/n) >";
 			std::cin >> yes_or_no;
 			if(yes_or_no=="n"||yes_or_no=="N"){
 				Dice d (Colour::YELLOW);
@@ -141,7 +141,7 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 		//Blue Die
 
 		while(true){
-			std::cout << "Would you like to roll the blue die? (y/n)\t>";
+			std::cout << "Would you like to roll the blue die?   (y/n) >";
 			std::cin >> yes_or_no;
 			if(yes_or_no=="n"||yes_or_no=="N"){
 				Dice d (Colour::BLUE);
