@@ -133,20 +133,25 @@ int main() {
 
 		//roll the dice
         rod.roll();
-        
+
         //show roll
         std::cout << rod;
 
         //get active player's after roll input
         players[activePlayer]->inputAfterRoll(rod);
+        std::cout << "Your updated scoresheet: " << std::endl;
+        std::cout << *players[activePlayer]->ss;
 
         for(int i=0; i < numPlayers; ++i) {
         	if (players[i]->isActive()) continue;
         	//inactive players get their turns
         	clearConsole(); //make a bit of space between players
+            std::cout << players[i] -> getName() << std::endl;
 			std::cout << *players[i]->ss; //show ss
             std::cout << rod; //reshow rod
 			players[i]->inputAfterRoll(rod);
+            std::cout << "Your updated scoresheet: " << std::endl;
+            std::cout << *players[i]->ss;
         }
 
 		//check gameOver

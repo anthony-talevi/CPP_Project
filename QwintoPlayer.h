@@ -4,6 +4,7 @@
 #include "Player.h"
 
 class QwintoPlayer: public Player {
+	bool verifyChoice(Colour, RollOfDice&);
 public:
 	QwintoPlayer(std::string name);
 	void inputAfterRoll(RollOfDice& rd);

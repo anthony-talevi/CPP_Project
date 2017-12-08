@@ -16,32 +16,46 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 	*	would like to add the rolled score.  Both active and inactive players
 	*   behave the same way / perform the same actions after a roll.
 	*/
-	
+
 	//Information needed to add score to scoresheet
 	Colour col;
 	int pos;
-	
+
 	bool failThrow = false;
 
 	//Colour input
 	while(true && !failThrow){
 		std::string row;
-		std::cout << "For which colour would you like to score these points? (r/y/b/f) >";
+		std::cout << "For which colour would you like to score these points? (/";
+		for(Dice d : rd){
+			std::string colour = d.getColour();
+			if(colour=="Red"){
+				std::cout << "r/";
+			}
+			else if(colour=="Yellow"){
+				std::cout << "y/";
+			}
+			else if(colour=="Blue"){
+				std::cout << "b/";
+			}
+		}
+		std::cout << ")" << std::endl;
 		std::cin >> row;
 
 		if(row=="r"){
 			col = Colour::RED;
-			break;
+			if(verifyChoice(col, rd)) break;
 		}
 
 		else if(row=="y"){
 			col = Colour::YELLOW;
-			break;
+			if(verifyChoice(col, rd)) break;
 		}
 
 		else if(row=="b"){
 			col = Colour::BLUE;
-			break;
+			if(verifyChoice(col, rd)) break;
+
 		}
 		//handle failing throws
 		else if (row == "f") {
@@ -54,7 +68,7 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 				std::cout << "You are the active player, failing your throw will result in a -5 pt penalty." << std::endl;
 				std::cout << "Please confirm you want to do this: (y/n) >";
 				std::cin>> row;
-				
+
 				if (row == "y") failThrow = true;
 			}
 		}
@@ -62,6 +76,7 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 		else{
 			std::cout << "Invalid input." << std::endl;
 		}
+
 	}
 
 	//Position input
@@ -78,7 +93,7 @@ void QwintoPlayer::inputAfterRoll(RollOfDice& rd){
 		}
 
 	}
-	
+
 	//record the failed throw for the active player
 	if (failThrow && isActive()) {
 		ss->fail();
@@ -167,5 +182,16 @@ void QwintoPlayer::inputBeforeRoll(RollOfDice& rd) {
 		std::cout << "Please wait for the other player to finish their turn" << std::endl << std::endl;
 	}
 
+
+}
+
+bool QwintoPlayer::verifyChoice(Colour col, RollOfDice& rd){
+	//Make sure colour is one of dice rolled
+	for(Dice d : rd){
+		if(d.compareCol(col)) return true;
+	}
+	std::cout << "No Dice rolled are the colour of the selected row.  Please enter a different row";
+	std::cout << std::endl;
+	return false;
 
 }

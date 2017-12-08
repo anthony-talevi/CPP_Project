@@ -10,7 +10,8 @@
 
 #include "RandomDice.h"
 
-std::mt19937 RandomDice::rand_engine = std::mt19937();
+std::random_device RandomDice::rd;
+std::mt19937 RandomDice::rand_engine = std::mt19937(rd());
 std::uniform_int_distribution<> RandomDice::rand = std::uniform_int_distribution<int>(1,6);
 
 int RandomDice::generate(){

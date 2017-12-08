@@ -11,8 +11,8 @@ public:
 protected:
 	std::string outputFromScoreSheet();
 private:
-	Colour chooseColour(std::string msg = "Colour");
-	bool twoWhites(RollOfDice whites);
+	Colour chooseColour(std::string msg, RollOfDice&);
+	bool twoWhites(RollOfDice& whites);
 	bool combine(RollOfDice& rd);
 };
 

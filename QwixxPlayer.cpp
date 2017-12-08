@@ -100,9 +100,9 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 }
 
 //adds the two white dice to a colour
-bool QwixxPlayer::twoWhites(RollOfDice whites) {
+bool QwixxPlayer::twoWhites(RollOfDice& whites) {
 	//get the colour
-	Colour col = chooseColour("colour row should the white dice be added to");
+	Colour col = chooseColour("colour row should the white dice be added to", whites);
 
 	//try to place the white dice
 	bool success = ss->score(whites, col);
@@ -118,7 +118,7 @@ bool QwixxPlayer::twoWhites(RollOfDice whites) {
 
 bool QwixxPlayer::combine(RollOfDice& rd) {
 	//get the colour
-	Colour col = chooseColour("colour row should we combine with");
+	Colour col = chooseColour("colour row should we combine with", rd);
 	int white;
 	RollOfDice combined = RollOfDice(rd);
 
@@ -157,12 +157,29 @@ void QwixxPlayer::inputBeforeRoll(RollOfDice& rd) {
 
 
 
-Colour QwixxPlayer::chooseColour(std::string msg){
+Colour QwixxPlayer::chooseColour(std::string msg, RollOfDice& rd){
 	std::string second_col;
 	Colour col;
 	//What colour for second score?
 	while(true){
-		std::cout << "Which " << msg << "? (r/y/b/g) >";
+		std::cout << "Which " << msg << "? (";
+		//Get colours in the RollOfDice
+		for(Dice d : rd){
+			std::string colour = d.getColour();
+			if(colour=="Red"){
+				std::cout << "r/";
+			}
+			else if(colour=="Yellow"){
+				std::cout << "y/";
+			}
+			else if(colour=="Blue"){
+				std::cout << "b/";
+			}
+			else if(colour=="Green"){
+				std::cout << "g/";
+			}
+		}
+		std::cout << ")" << std::endl;
 		std::cin >> second_col;		//Second colour input
 
 		//Convert input to Colour
