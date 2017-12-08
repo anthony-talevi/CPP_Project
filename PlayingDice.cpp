@@ -84,9 +84,9 @@ int main() {
             Dice w1 (Dice(Colour::WHITE1));
             Dice w2 (Dice(Colour::WHITE2));
             Dice g (Dice(Colour::GREEN));
+            rod.add(g);
             rod.add(w1);
             rod.add(w2);
-            rod.add(g);
             break;
         }
         else{
@@ -156,8 +156,6 @@ int main() {
     	players[activePlayer]->deactivate();
     	turnCount++; //increment turn count
     	clearConsole(); //make a bit of space between turns
-
-    	if (turnCount > 4) break;
 	}
 
 	//print out scoresheets
