@@ -8,8 +8,12 @@ public:
 	QwixxPlayer(std::string name);
 	void inputAfterRoll(RollOfDice& rd);
 	void inputBeforeRoll(RollOfDice& rd);
+protected:
+	std::string outputFromScoreSheet();
 private:
-	Colour chooseColour();
+	Colour chooseColour(std::string msg = "Colour");
+	bool twoWhites(RollOfDice whites);
+	bool combine(RollOfDice& rd);
 };
 
 #endif // _QWIXX_PLAYER_H
