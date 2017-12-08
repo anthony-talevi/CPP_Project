@@ -24,16 +24,16 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 			Dice w1 (Colour::WHITE1);
 			Dice w2 (Colour::WHITE2);
 			RollOfDice whites = rd.pair(w1, w2);
-			
+
 			bool white;
 			bool colour;
-			
+
 			//the white dice are always added first
 			std::cout << "The white dice will be added to the ScoreSheet first" << std::endl;
-			
+
 			white = twoWhites(whites);
 			colour = combine(rd);
-			
+
 			if (white || colour) break;
 		}
 
@@ -49,7 +49,7 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 			std::cout << "Or you can choose to fail the throw. This counts as a -5pt penalty." << std::endl;
 			std::cout << "Would you like to fail the throw? (y/n) >";
 			std::cin >> failInput;
-			
+
 			//fail the throw
 			if (failInput == "y" || failInput == "Y") {
 				ss->fail();
@@ -65,7 +65,7 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 
 			if (twoWhites(whites)) break;
 		}
-		
+
 		//active player can choose to combine or use the whites
 		else if (num_scores == 1 && isActive()) {
 			//get choice from user
@@ -73,7 +73,7 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 			std::cout << "Would you like to combine a white and a coloured dice, (c)" <<std::endl;
 			std::cout << "Or place the two white dice in any colour? (w)" << std::endl;
 			std::cin >> choiceInput;
-			
+
 			//combine
 			if (choiceInput == "c" || choiceInput == "C") {
 				if (combine(rd)) break;
@@ -83,7 +83,7 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 				Dice w1 (Colour::WHITE1);
 				Dice w2 (Colour::WHITE2);
 				RollOfDice whites = rd.pair(w1, w2);
-				
+
 				if (twoWhites(whites)) break;
 			}
 			//bad input
@@ -103,7 +103,7 @@ void QwixxPlayer::inputAfterRoll(RollOfDice& rd) {
 bool QwixxPlayer::twoWhites(RollOfDice whites) {
 	//get the colour
 	Colour col = chooseColour("colour row should the white dice be added to");
-	
+
 	//try to place the white dice
 	bool success = ss->score(whites, col);
 	if(success) std::cout << "Score successfully added to scoresheet" << std::endl;
@@ -121,7 +121,7 @@ bool QwixxPlayer::combine(RollOfDice& rd) {
 	Colour col = chooseColour("colour row should we combine with");
 	int white;
 	RollOfDice combined = RollOfDice(rd);
-	
+
 	//find out which white dice to use
 	while(true){
 		std::cout << "Which white dice would you like to use? (1/2) >";
@@ -138,7 +138,7 @@ bool QwixxPlayer::combine(RollOfDice& rd) {
 			std::cout << "Invalid input. Try again.";
 		}
 	}
-	
+
 	//try to place the dice
 	bool success = ss->score(combined,col);
 	if(success) std::cout << "Score successfully added to scoresheet" << std::endl;
@@ -147,7 +147,7 @@ bool QwixxPlayer::combine(RollOfDice& rd) {
 		std::cout << "Select a different row, or different number of scores.";
 		std::cout << std::endl;
 	}
-	
+
 	return success;
 }
 
