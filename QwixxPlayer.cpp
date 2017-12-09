@@ -155,8 +155,7 @@ void QwixxPlayer::inputBeforeRoll(RollOfDice& rd) {
 	//function does nothing in qwixx
 }
 
-
-
+//chooses the colour the player wants to interact with
 Colour QwixxPlayer::chooseColour(std::string msg, RollOfDice& rd){
 	std::string second_col;
 	Colour col;

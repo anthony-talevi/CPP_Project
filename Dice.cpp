@@ -8,6 +8,7 @@
 
 Dice::Dice(Colour col): c(col){};
 
+//rolls the dice
 int Dice::roll(RandomDice& rd){
     current_face = rd.generate();
     return current_face;
@@ -19,6 +20,7 @@ bool Dice::compareCol(Dice d){
     else{return false;}
 }
 
+//returns the string value for the colour
 std::string Dice::getColour()const{
     switch(c){
 
@@ -41,13 +43,14 @@ std::string Dice::getColour()const{
     }
 }
 
+//returns the current face
 int Dice::getCurrentFace() const{
     return current_face;
 }
 
-
+//overloads the << operator for printing
 std::ostream& operator<<(std::ostream& output, const Dice& d){
-	if (d.getCurrentFace() == 0) return output;
+	if (d.getCurrentFace() == 0) return output; //empty dice aren't print
 	
     output <<  d.getColour() << ": " << d.getCurrentFace() << std::endl;
     return output;

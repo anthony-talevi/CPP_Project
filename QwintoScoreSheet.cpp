@@ -91,6 +91,9 @@ bool QwintoScoreSheet::validate(RollOfDice rd, Colour c, int offset) {
 	else return false;
 }
 
+//overload not operator to indicate if the game is over
+//returns true when its over
+//returns false when its not
 bool QwintoScoreSheet::operator!() const {
 	//4+ failed attempts for a player and the game is over
 	if (failedAttempts > 3) return true;
@@ -105,6 +108,7 @@ bool QwintoScoreSheet::operator!() const {
 	return false;
 }
 
+//prints the scoresheet
 std::ostream& QwintoScoreSheet::printSheet(std::ostream& os) const {
 	os << "---------------------------------------------";
 	os << std::endl;

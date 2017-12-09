@@ -96,6 +96,8 @@ bool QwixxScoreSheet::operator!() const {
 	return false;
 }
 
+//prints the scoresheet, works with the overloaded << operator
+//of the scoresheet class to behave polymorphically
 std::ostream& QwixxScoreSheet::printSheet(std::ostream& os) const {
 	os << "---------------------------------------------";
 	os << std::endl;

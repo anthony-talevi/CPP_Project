@@ -19,6 +19,8 @@ bool ScoreSheet::fail() {
 	else return false;
 }
 
+//overloads the << for printing of the scoresheet
+//calls the virtual printsheet function to behave polymorphically
 std::ostream& operator<<(std::ostream& os, const ScoreSheet& ss) {
 	return ss.printSheet(os);
 }
